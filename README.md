@@ -1,29 +1,28 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+# Gra Milionerzy - Projekt 7
 
-### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Podział prac 
 
-### How do I get set up? ###
+ | | Zadania | |
+Kamil Rataj| | |
+Kacper Krzyżkowski| | |
+Tomasz Porwisz| | |
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Instrukcja obsługi dla użytkownika 
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
 
-### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+## Wykorzystane narzędzia 
+
+>  **Atlassian Bitbucket** (Git)
+
+>  **Microsoft Office Excel** (pliki `.csv`)
+  
+## Proces debugowania 
+
+```bash
+	debug
+```
