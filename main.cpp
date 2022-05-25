@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+#include "global.hpp"
 
 int main() {
 	cout<<"Gra Milionerzy"<<endl; 
