@@ -1,2 +1,11 @@
-ID,QUESTION,ANSWER1,ANSWER2,ANSWER3,ANSWER4,CORRECT_ANSWER
-1,,,,,,
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;Kwitn¹ce Wiœnie w Japonii zwiastuj¹ nadejœcie wiosny, a co symbolizuj¹?;kruche piêkno i ulotn¹ naturê ¿ycia ;nowe ¿ycie ;dostatek ;niedostatek;1
+2;Wojna 30-letnia rozegra³a siê g³ównie na terenie:;W³och ;Francji ;Niemiec ;Hiszpanii;3
+3;Który turniej Wielkiego Szlema rozgrywa siê na kortach Stade Roland Garros?;US Open ;Australia Open ;French Open ;Wimbledon;3
+4;Rozwi¹¿ zadanie: Kasia przygotowa³a z cukru i wody syrop do deseru. Stosunek masy cukru do masy wody w tym syropie jest równy 5:3. Ile procent masy tego syropu stanowi masa cukru? ;37,5 proc. ;60 proc. ;62,5 proc. ;65 proc.;3
+5; W którym rozbiorze Polski nie bra³a udzia³u Austria?;pierwszym ;drugim ;trzecim ;czwartym;2
+6;Ilu graczy liczy dru¿yna hokeja na lodzie? Chodzi oczywiœcie o liczbê graczy na lodowisku ;5;6;7;8;2
+7;Mu³ to krzy¿ówka:;klaczy os³a i ogiera konia ;krowy i ogiera konia ;klaczy konia i ogiera os³a ;krowy i ogiera os³a;3
+8;Jedna z najwiêkszych bitew II wojny œwiatowej na Pacyfiku mia³a miejsce:;na Morzu Koczkodanowym ;na Morzu Koralowym ;na Morzu Kokosowym ;Morzu Martwym;2
+9;S³ynny rajdowiec Niki Lauda by³ z pochodzenia:;Finem ;Szwedem ;Austriakiem ;Norwegiem;3
+10;"Kto gra³ rolê Pana M³odego w ekranizacji ""Wesela"" Wyspiañskiego, wyre¿yserowanej przez Andrzeja Wajdê? ";Andrzej £apicki ;Wojciech Pszoniak ;Daniel Olbrychski ;Cerzary Pazura;3

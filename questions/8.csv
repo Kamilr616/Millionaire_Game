@@ -1,2 +1,11 @@
-ID,QUESTION,ANSWER1,ANSWER2,ANSWER3,ANSWER4,CORRECT_ANSWER
-1,,,,,,
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;Która religia ma w Mongolii najwiêcej wyznawców?;buddyzm ;prawos³awie ;islam;chrzeœcijañstwo ;1
+2;Ilu amerykañskich prezydentów zosta³o sportretowanych w granitowej œcianie Mount Rushmore? ;4;2;5;3;1
+3;Jakie zwierzê widnieje w herbie Lublina?;Koñ ;Gryf ;Kozio³ ;Smok;3
+4;Wyspy Owcze s¹ terytorium zale¿nym:;Irlandii ;Francji ;Danii ;Niemiec;3
+5;Pierwszy, historyczny Lancer Evolution powsta³ w roku?;1991;1992;1993;1994;2
+6;Rafael Nadal to s³ynny tenisista ;Hiszpañski;W³oski;Norweski;Portugalski;1
+7;Muhammad Ali to legendarny;pi³karz;bosker;kierowca wyscigowy;tenisista;2
+8;W którym roku Titanic zaton¹³ na Oceanie Atlantyckim 15 kwietnia podczas dziewiczej podró¿y z Southampton? ;1912;1914;1910;1913;1
+9;"Z iloma krajami graniczy Polska?";5;7;6;8;2
+10;Data terrorystycznego ataku na WTC to:;11 sierpnia 2001 r ;11 wrzeœnia 2001 r ;11 paŸdziernika 2001 r ;11 listopad 2001 r;2
