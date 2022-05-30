@@ -226,8 +226,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
                 }
                 else
                 {
-                    cout << "Uzyles juz tego kola ratunkowego (50/50)"
-                         << "\n";
+                    cout << "Uzyles juz tego kola ratunkowego (50/50)" << endl
+                         << "Odpowiedz >> ";
                 }
             }
             else if ((userAns) == 'f')
@@ -245,8 +245,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
                 }
                 else
                 {
-                    cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)"
-                         << "\n";
+                    cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << endl
+                         << "Odpowiedz >> ";
                 }
             }
             else if ((userAns) == 'p')
@@ -264,8 +264,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
                 }
                 else
                 {
-                    cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)"
-                         << "\n";
+                    cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << endl
+                         << "Odpowiedz >> ";
                 }
             }
             else
