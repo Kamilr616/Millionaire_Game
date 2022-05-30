@@ -13,8 +13,6 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "question.hpp"
-
 
 using namespace std;
 

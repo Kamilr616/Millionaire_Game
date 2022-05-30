@@ -1,3 +1,6 @@
+#ifndef QUESTION_HPP
+#define QUESTION_HPP
+
 #include "global.hpp"
 
 using namespace std;
@@ -21,8 +24,11 @@ class question
         string getAns3();
         string getAns4();
         int getCorr();
-        
+
         question questionFromLine(string qLine);
         question getQuestions(int stepCounter);
 
 };
+
+
+#endif // QUESTION_HPP
