@@ -13,8 +13,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#include "question.cpp"
-#include "generateSet.cpp"
+#include "question.hpp"
 
 
 using namespace std;
