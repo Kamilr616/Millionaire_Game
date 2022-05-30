@@ -1,6 +1,9 @@
 #include "global.hpp"
 #include "question.hpp"
+
+#include "stage.hpp"
 #include "question.cpp"
+#include "stage.cpp"
 
 using namespace std;
 
@@ -8,9 +11,8 @@ using namespace std;
 int main()
 {
 
-    int gameStepCounter, i, option, userAns;
+    int i, option, userAns;
 
-    gameStepCounter = 0;
     i = 0;
     option = 1;
 
@@ -18,6 +20,7 @@ int main()
 
     question gameSet[15]; //zestaw pytan do calej gry
 
+    Stage game;
 
     while(option > 0)
     {
