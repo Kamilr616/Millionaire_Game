@@ -1,5 +1,6 @@
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef GLOBAL_HPP
+#define GLOBAL_HPP
+
 
 #include <iostream>
 #include <iomanip>
@@ -8,9 +9,15 @@
 #include <random>
 #include <fstream>
 #include <iterator>
+#include <sstream>
+#include <ctime>
+#include <cstdlib>
+
+#include "question.cpp"
+#include "generateSet.cpp"
 
 
 using namespace std;
 
 
-#endif // GLOBAL_H
+#endif // GLOBAL_HPP
