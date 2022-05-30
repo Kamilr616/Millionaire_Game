@@ -37,21 +37,50 @@ int main()
                 << "2 > " << gameSet[i].getAns2() << endl
                 << "3 > " << gameSet[i].getAns3() << endl
                 << "4 > " << gameSet[i].getAns4() << endl
+                << "0 > Poddaj sie" << endl
                 << "Odpowiedz >> ";
+
             cin >> userAns;
+
             if(userAns == gameSet[i].getCorr())
             {
-                cout << "Gratulacje! Poprawna odpowiedz!";            }
+                cout << "Gratulacje! Poprawna odpowiedz to ";
+                
+                    switch (userAns)
+                    {
+                    case 1:
+                        cout << gameSet[i].getAns1();
+                        break;
+                    case 2:
+                        cout << gameSet[i].getAns2();
+                        break;
+                    case 3:
+                        cout << gameSet[i].getAns3();
+                        break;
+                    case 4:
+                        cout << gameSet[i].getAns4();
+                        break;
+                    case 0:
+                        option = -1;
+                        break;
+                    default:
+                        break;
+                    }
+       
+                    cout << endl << "Nastepny etap > " << (i + 2) << endl;
+            }
             else
             {
                 system("cls"); // cmd terminal clear
                 cout << "GAME OVER" << endl;
+                option = -1;
                 break;
             }
             system("PAUSE");
 
         }
-        cout << "Twoj wynik >> " << (i + 1) << endl
+
+        cout << "Twoj wynik > " << (i + 1) << endl
              << "Kontynuowac? 0. Zakoncz" << endl;
         cin >> option;
     }
