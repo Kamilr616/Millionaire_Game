@@ -113,8 +113,15 @@ int Stage::end()
     int result = score;
 
     // tutaj trzeba zaimplementować przypadek zrezygnowania
-    
-    
+    if(gameStage <= 4)
+        result = 0;
+    if (gameStage <= 10 || gameStage >= 6)
+        result = 1000;
+    if(gameStage > 10)
+        result = 32000;
+    if(gameStage >= 15)
+        result = 1000000;
+        
     gameStage = 0;
     score = 0;
 
