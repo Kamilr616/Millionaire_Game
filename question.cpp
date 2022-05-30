@@ -11,10 +11,15 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
-void askQuestion()
+void question::askQuestion()
 {
 
-    
+        cout << "Pytanie > " << getText() << endl
+         << "Odpowiedzi: " << endl
+         << "A > " << getAns1() << endl
+         << "B > " << getAns2() << endl
+         << "C > " << getAns3() << endl
+         << "D > " << getAns4() << endl;
 }
 
 
