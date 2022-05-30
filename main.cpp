@@ -1,7 +1,7 @@
 #include "global.hpp"
 #include "question.hpp"
-
 #include "stage.hpp"
+
 #include "question.cpp"
 #include "stage.cpp"
 
@@ -9,15 +9,14 @@ using namespace std;
 
 int main()
 {
-
-    int i, option,Ans;
+    int i, option, Ans;
     bool showAns;
     
     bool lifelines[3] = {false, false, false}; // lifelines[0] - 50/50, [1] - telefon do przyjaciela, [2] - pytanie do publicznosci
 
     i = 0;
     option = 1;
-    showAns = true;
+    showAns = false;
     
     srand(time(0));
 
@@ -35,9 +34,8 @@ int main()
         cin >> option;
 
         for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
-        {
             gameSet[i] = gameSet[i].getQuestions(i + 1);
-        }
+        
 
         lifelines[0] = false;
         lifelines[1] = false;
@@ -89,21 +87,22 @@ int main()
                 system("cls");
                 cout << "   Ustawienia programu:" << endl;
                 cout << "1. Pokaz odpowiedzi  >> " << (showAns ? "Tak" : "Nie") << endl
-                     << "2.  >>  " << endl
+                     << endl
                      << "0. Cofnij" << endl
-                     << ">>    ";
+                     << "Opcja >> ";
                 cin >> option;
+
                 switch (option)
                 {
-                case 1:
-                    showAns = not showAns;
-                    break;
-                case 2:
-                    break;
-                case 0:
-                    break;
-                default:
-                    break;
+                    case 1:
+                        showAns = not showAns;
+                        break;
+                    case 2:
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        break;
                 }
             }
             option = -1;
