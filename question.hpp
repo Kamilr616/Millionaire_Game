@@ -24,11 +24,11 @@ class question
         string getAns3();
         string getAns4();
         int getCorr();
-        bool askQuestion();
+        bool askQuestion(bool lifelinesUsed[3]);
 
         question questionFromLine(string qLine);
         question getQuestions(int stepCounter);
-        void lifeline5050();
+        bool lifeline5050();
 
 };
 

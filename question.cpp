@@ -11,7 +11,7 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
-void question::lifeline5050(){
+bool question::lifeline5050(){
     int ffCounter = 0;
     int randQ[2];
     while(ffCounter < 2){
@@ -42,10 +42,11 @@ void question::lifeline5050(){
             answ4 = " ";
         }
     }
+    return true;
 }
 
 
-bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     bool result;
     char userAns;
@@ -78,13 +79,42 @@ bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeś
                 break;
             }
         }
-        else if((userAns) == '%'){
-            lifeline5050();
-            if(askQuestion() == true){
-                return true;
+        else if((userAns) == '%'){ // wprowadzenie 50/50
+            if(lifelinesUsed[0]== false){
+                lifelinesUsed[0] = lifeline5050();
+                if(askQuestion(lifelinesUsed) == true){
+                    return true;
+                }
+                else return false;
             }
-            else return false;
+            else{
+                cout << "Uzyles juz tego kola ratunkowego (50/50)" << "\n";
+            }
         }
+        /*else if((userAns) == 'f'){ // wprowadzenie phone a friend
+            if(lifelinesUsed[1]== false){
+                lifelinesUsed[1] = lifelinePhoneAFriend();
+                if(askQuestion(lifelinesUsed) == true){
+                    return true;
+                }
+                else return false;
+            }
+            else{
+                cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
+            }
+        }
+        else if((userAns) == '%p'){ // wprowadzenie audience poll
+            if(lifelinesUsed[1]== false){
+                lifelinesUsed[1] = lifelineAudiencePoll();
+                if(askQuestion(lifelinesUsed) == true){
+                    return true;
+                }
+                else return false;
+            }
+            else{
+                cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << "\n";
+            }
+        }*/
         else {
             cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << "\n";
         }

@@ -11,7 +11,7 @@ int main()
 {
 
     int i, option;
-
+    bool lifelines[3] = {false}; // lifelines[0] - 50/50, [1] - telefon do przyjaciela, [2] - pytanie do publicznosci
     i = 0;
     option = 1;
 
@@ -42,7 +42,7 @@ int main()
 
         game.show();
 
-        if (((gameSet[game.getGameStage()].askQuestion()) == true))
+        if (((gameSet[game.getGameStage()].askQuestion(lifelines)) == true))
         {
             system("PAUSE");
             game.up();
