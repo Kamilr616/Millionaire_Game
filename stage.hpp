@@ -11,12 +11,17 @@ class Stage
     private:
 
         int gameStage = 0;
+        int score = 0;
 
 
     public:
 
         Stage() = default;
         int getGameStage();
+        void up();
+        void show();
+        int end();
+        
         
 };
 

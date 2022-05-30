@@ -34,12 +34,14 @@ int main()
         
         if((gameSet[game.getGameStage()].askQuestion()) == true)
         {
-            //game. ++
-            cout << "Gratulacje!";
             system("PAUSE");
+            game.up();
+
         }
         else
         {
+            cout << "Twoj wynik > " << game.end() << endl;
+
             cout << "0.Zakoncz" << endl;
             cin >> option;
         }
