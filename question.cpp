@@ -11,6 +11,13 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
+void askQuestion()
+{
+
+    
+}
+
+
 string question::getText()
 {
     return text;
