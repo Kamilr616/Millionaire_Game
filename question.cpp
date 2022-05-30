@@ -59,14 +59,33 @@ bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowie
          << "B > " << getAns2() << endl
          << "C > " << getAns3() << endl
          << "D > " << getAns4() << endl
-         << "Poprawna odpowiedz "<< getCorr() << endl
+         << "Dostepne kola ratunkowe:" << endl;
+        if(lifelinesUsed[0] == false) cout << "-50/50 (wprowadz '%' na klawiaturze)" << endl;
+        if(lifelinesUsed[1] == false) cout << "-Telefon do przyjaciela (wprowadz 'f' na klawiaturze)" << endl;
+        if(lifelinesUsed[2] == false) cout << "-Pytanie do publicznosci (wprowadz 'p' na klawiaturze)" << endl;
+        if(lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true) cout << "Brak" << endl;
+    cout << "Poprawna odpowiedz "<< getCorr() << endl
          << "Odpowiedz >> ";
        userAns = 'h';
 
-    while((userAns != 'A') || (userAns != 'B') || (userAns != 'C') || (userAns != 'D') || (userAns != '%')){
+    while((userAns != 'A') || (userAns != 'B') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p')){
         cin >> userAns;
         if(userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D'){
             if (((int)userAns - 64) == getCorr())
+            {
+                cout << "Dobrze!" << endl;
+                result = true;
+                break;       
+            }      
+            else
+            {
+                cout << "Zle!" << endl;
+                result = false;
+                break;
+            }
+        }
+        if(userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd'){
+            if (((int)userAns - 96) == getCorr())
             {
                 cout << "Dobrze!" << endl;
                 result = true;
