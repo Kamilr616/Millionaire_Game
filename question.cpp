@@ -11,6 +11,24 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
+bool question::lifelineAskTheAudience(){
+    int g1, g2, g3, g4;
+    int total = 100;
+    g1 = (int)(rand() % 50 + 50);
+    int remainder = total - g1;
+    total = remainder;
+    g2 = (int)(rand() % remainder + 1);
+    remainder = total - g2;
+    total = remainder;
+    g3 = (int)(rand() % remainder + 1);
+    g4 = total - g3;
+    cout << "Odpowiedzi publicznosci to: " << "A: " << g1 << "% " << "B: " << g2 << "% " << "C: " << g3 << "% " << "D: " << g4 << "%" << "\n"; 
+    return true;
+}
+
+
+
+
 bool question::lifelinePhoneAFriend(int stepCounter){
     int guess;
     if(stepCounter < 5){
@@ -167,10 +185,10 @@ bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta py
                 cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
             }
         }
-        /*else if((userAns) == '%p'){ // wprowadzenie audience poll
-            if(lifelinesUsed[1]== false){
-                lifelinesUsed[1] = lifelineAudiencePoll();
-                if(askQuestion(lifelinesUsed) == true){
+        else if((userAns) == 'p'){ // wprowadzenie audience poll
+            if(lifelinesUsed[2]== false){
+                lifelinesUsed[2] = lifelineAskTheAudience();
+                if(askQuestion(lifelinesUsed, stepCount) == true){
                     return true;
                 }
                 else return false;
@@ -178,7 +196,7 @@ bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta py
             else{
                 cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << "\n";
             }
-        }*/
+        }
         else {
             cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << "\n";
         }
