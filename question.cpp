@@ -11,6 +11,51 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
+bool question::lifelinePhoneAFriend(int stepCounter){
+    int guess;
+    if(stepCounter < 5){
+        cout << "Uwazam, ze prawidlowa odpowiedz to ";
+        switch (getCorr())
+        {
+        case 1:
+            cout << "A" << endl;
+            break;
+        case 2:
+            cout << "B" << endl;
+            break;
+        case 3:
+            cout << "C" << endl;
+            break;
+        case 4:
+            cout << "D" << endl;
+            break;
+        }
+    }
+    else{
+        guess = (int)(rand() % 4 + 1);
+        cout << "Nie mam pewnosci, ale mysle, ze prawidlowa odpowiedz to ";
+        switch (guess)
+        {
+        case 1:
+            cout << "A" << endl;
+            break;
+        case 2:
+            cout << "B" << endl;
+            break;
+        case 3:
+            cout << "C" << endl;
+            break;
+        case 4:
+            cout << "D" << endl;
+            break;
+        }
+    }
+
+
+    return true;
+}
+
+
 bool question::lifeline5050(){
     int ffCounter = 0;
     int randQ[2];
@@ -46,7 +91,7 @@ bool question::lifeline5050(){
 }
 
 
-bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     bool result;
     char userAns;
@@ -101,7 +146,7 @@ bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowie
         else if((userAns) == '%'){ // wprowadzenie 50/50
             if(lifelinesUsed[0]== false){
                 lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed) == true){
+                if(askQuestion(lifelinesUsed, stepCount) == true){
                     return true;
                 }
                 else return false;
@@ -110,10 +155,10 @@ bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowie
                 cout << "Uzyles juz tego kola ratunkowego (50/50)" << "\n";
             }
         }
-        /*else if((userAns) == 'f'){ // wprowadzenie phone a friend
+        else if((userAns) == 'f'){ // wprowadzenie phone a friend
             if(lifelinesUsed[1]== false){
-                lifelinesUsed[1] = lifelinePhoneAFriend();
-                if(askQuestion(lifelinesUsed) == true){
+                lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
+                if(askQuestion(lifelinesUsed, stepCount) == true){
                     return true;
                 }
                 else return false;
@@ -122,7 +167,7 @@ bool question::askQuestion(bool lifelinesUsed[3]) //Wyświelta pytanie i odpowie
                 cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
             }
         }
-        else if((userAns) == '%p'){ // wprowadzenie audience poll
+        /*else if((userAns) == '%p'){ // wprowadzenie audience poll
             if(lifelinesUsed[1]== false){
                 lifelinesUsed[1] = lifelineAudiencePoll();
                 if(askQuestion(lifelinesUsed) == true){
