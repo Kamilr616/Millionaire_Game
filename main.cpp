@@ -19,42 +19,62 @@ int main()
 
     question gameSet[15]; // zestaw pytan do calej gry
 
-    Stage game;
+    Stage game; //  etap gry
 
-    for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
+    while(option)
     {
-        gameSet[i] = gameSet[i].getQuestions(i + 1);
-    }
-
-    while (1)
-    {
-
         system("cls"); // cmd terminal clear
+        cout << "Gra milionerzy " << endl
+             << "1. Nowa gra" << endl
+             << "0. Zakoncz" << endl;
 
-        if (game.getGameStage() >= 15)
+        cin >> option;
+
+        for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
         {
-            cout << "Jestes milionerem !!!" << endl
-                 << "Koniec gry" << endl
-                 << "Wynik > " << game.end() << " zL" << endl;
-            system("PAUSE");
+            gameSet[i] = gameSet[i].getQuestions(i + 1);
+        }
+
+        switch (option)
+        {
+        case 1:
+            while (true)
+            {
+                system("cls"); // cmd terminal clear
+
+                if (game.getGameStage() >= 15)
+                {
+                    cout << "Jestes milionerem !!!" << endl
+                         << "Koniec gry" << endl
+                         << "Wynik > " << game.end() << " zL" << endl;
+                    system("PAUSE");
+                    break;
+                }
+
+                game.show();
+
+                if (((gameSet[game.getGameStage()].askQuestion(lifelines)) == true))
+                {
+                    system("PAUSE");
+                    game.up();
+                }
+                else
+                {
+                    cout << "Koniec gry!" << endl
+                         << "Twoj wynik > " << game.end() << " zL" << endl;
+                    system("PAUSE");
+                    break;
+                }
+            }
+            break;
+        case 0:
+            option = 0;
+            break;
+        default:
             break;
         }
-
-        game.show();
-
-        if (((gameSet[game.getGameStage()].askQuestion(lifelines)) == true))
-        {
-            system("PAUSE");
-            game.up();
-        }
-        else
-        {
-            system("cls");
-            cout << "Koniec gry!" << endl
-                 << "Twoj wynik > " << game.end() << " zL" << endl;
-            system("PAUSE");
-            break;
-        }
+        
     }
+
     return 0;
 }
