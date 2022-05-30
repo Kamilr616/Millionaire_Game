@@ -17,6 +17,11 @@ int Stage::getGameStage()
     return gameStage;
 }
 
+int Stage::getScore()
+{
+    return score;
+}
+
 void Stage::up()
 {
     gameStage += 1;      // nastepny etap
@@ -102,11 +107,6 @@ void Stage::up()
     }
 }
 
-void Stage::show()
-{
-    cout << "Aktualny etap > " << (gameStage+1) << endl
-         << "Wynik > " << score  <<  " zL"<< endl;
-}
 
 int Stage::end()
 {

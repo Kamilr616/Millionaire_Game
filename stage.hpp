@@ -18,8 +18,8 @@ class Stage
         Stage();
         ~Stage();
         int getGameStage();
+        int getScore();
         void up();
-        void show();
         int end();
         int giveup();
         

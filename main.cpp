@@ -18,7 +18,6 @@ int main()
     srand(time(0));
 
     question gameSet[15]; // zestaw pytan do calej gry
-
     Stage game; //  etap gry
 
     while (option)
@@ -55,8 +54,7 @@ int main()
                     break;
                 }
 
-                game.show();
-                Ans = (gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage()));
+                Ans = (gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage(), game.getScore()));
 
                 if (Ans == 1)
                 {

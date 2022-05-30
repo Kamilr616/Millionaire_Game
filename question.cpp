@@ -109,14 +109,15 @@ bool question::lifeline5050(){
 }
 
 
-int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     int result;
     char userAns;
     
     result = 0;
     userAns = 'h';
-
+    cout << "Aktualny etap > " << (stepCount+1) << endl
+    << "Wynik > " << scoreCount  <<  " zL"<< endl;
     cout << "Dostepne kola ratunkowe:" << endl;
     if (lifelinesUsed[0] == false)
         cout << "-50/50 (wprowadz '%' na klawiaturze)" << endl;
@@ -127,7 +128,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pyt
     if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
         cout << "Brak" << endl;
 
-    cout << endl 
+    cout << endl
+         
          << "Pytanie > " << getText() << endl
          << "Odpowiedzi: " << endl
          << "A > " << getAns1() << endl
@@ -182,8 +184,9 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pyt
         }
         else if((userAns) == '%'){ // wprowadzenie 50/50
             if(lifelinesUsed[0]== false){
+                system("cls");
                 lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
                     return 1;
                 }
                 else return 0;
@@ -194,8 +197,9 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pyt
         }
         else if((userAns) == 'f'){ // wprowadzenie phone a friend
             if(lifelinesUsed[1]== false){
+                system("cls");
                 lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
-                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
                     return 1;
                 }
                 else return 0;
@@ -206,8 +210,9 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pyt
         }
         else if((userAns) == 'p'){ // wprowadzenie audience poll
             if(lifelinesUsed[2]== false){
+                system("cls");
                 lifelinesUsed[2] = lifelineAskTheAudience();
-                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
                     return 1;
                 }
                 else return 0;
