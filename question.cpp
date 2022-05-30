@@ -14,6 +14,7 @@ bool question::lifelineAskTheAudience()
 {
     int g1, g2, g3, g4;
     int total = 100;
+
     g1 = (int)(rand() % 50 + 50);
     int remainder = total - g1;
     total = remainder;
@@ -113,7 +114,28 @@ bool question::lifeline5050()
     return true;
 }
 
-int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jest poprawna
+void question::showAnswear()
+{
+    cout << endl << "   Poprawna odpowiedz to > ";
+    switch (getCorr())
+    {
+    case 1:
+        cout << getAns1();
+        break;
+    case 2:
+        cout << getAns2();
+        break;
+    case 3:
+        cout << getAns3();
+        break;
+    case 4:
+        cout << getAns4();
+        break;
+    }
+    cout << endl;
+}
+
+int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     int result;
     char userAns;
@@ -133,134 +155,127 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
         cout << "Brak" << endl;
 
-    cout << endl  
-         << "Pytanie > " << getText() << endl
-         << "Odpowiedzi: " << endl
-         << "A > " << getAns1() << endl
-         << "B > " << getAns2() << endl
-         << "C > " << getAns3() << endl
-         << "D > " << getAns4() << endl
-         << endl
-         << "E > Poddaj sie - Koniec gry" << endl
-         << "Odpowiedz >> " << endl;
-    if(showAns)
-    {
-    cout << "Poprawna odpowiedz "<< getCorr() << endl;
-    }
 
-    while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
-    {
-        cin >> userAns;
+        if(showAns)
+            showAnswear();
 
-        if ((userAns == 'E') || (userAns == 'e'))
+        cout << endl
+             << "Pytanie > " << getText() << endl
+             << "Odpowiedzi: " << endl
+             << "A > " << getAns1() << endl
+             << "B > " << getAns2() << endl
+             << "C > " << getAns3() << endl
+             << "D > " << getAns4() << endl
+             << endl
+             << "E > Poddaj sie - Koniec gry" << endl
+             << "Odpowiedz >> ";
+
+        while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
         {
-            result = 2;
-            break;
-        }
+            cin >> userAns;
 
-        if (userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D')
-        {
-            if (((int)userAns - 64) == getCorr())
+            if ((userAns == 'E') || (userAns == 'e'))
             {
-                cout << "Dobrze!" << endl;
-                result = 1;
+                result = 2;
                 break;
             }
+
+            if (userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D')
+            {
+                if (((int)userAns - 64) == getCorr())
+                {
+                    cout << "Dobrze!" << endl;
+                    result = 1;
+                    break;
+                }
+                else
+                {
+                    cout << "Zle!" << endl;
+                    result = 0;
+                    break;
+                }
+            }
+
+            if (userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd')
+            {
+                if (((int)userAns - 96) == getCorr())
+                {
+                    cout << "Dobrze!" << endl;
+                    result = 1;
+                    break;
+                }
+                else
+                {
+                    cout << "Zle!" << endl;
+                    result = 0;
+                    break;
+                }
+            }
+            else if ((userAns) == '%')
+            { // wprowadzenie 50/50
+                if (lifelinesUsed[0] == false)
+                {
+                    system("cls");
+                    lifelinesUsed[0] = lifeline5050();
+                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                    {
+                        return 1;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                {
+                    cout << "Uzyles juz tego kola ratunkowego (50/50)"
+                         << "\n";
+                }
+            }
+            else if ((userAns) == 'f')
+            { // wprowadzenie phone a friend
+                if (lifelinesUsed[1] == false)
+                {
+                    system("cls");
+                    lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
+                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                    {
+                        return 1;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                {
+                    cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)"
+                         << "\n";
+                }
+            }
+            else if ((userAns) == 'p')
+            { // wprowadzenie audience poll
+                if (lifelinesUsed[2] == false)
+                {
+                    system("cls");
+                    lifelinesUsed[2] = lifelineAskTheAudience();
+                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                    {
+                        return 1;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                {
+                    cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)"
+                         << "\n";
+                }
+            }
             else
-           {
-                cout << "Zle!" << endl;
-                result = 0;
-                break;
+            {
+                cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
+                     << "Odpowiedz >> ";
             }
         }
 
-        if(userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd'){
-            if (((int)userAns - 96) == getCorr())
-            {
-                cout << "Dobrze!" << endl;
-                result = 1;
-                break;       
-            }      
-            else
-            {
-                cout << "Zle!" << endl;
-                result = 0;
-                break;
-            }
-        }
-        else if((userAns) == '%'){ // wprowadzenie 50/50
-            if(lifelinesUsed[0]== false)
-            {
-                system("cls");
-                lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                {
-                    return 1;
-                }
-                else return 0;
-            }
-            else
-            {
-                cout << "Uzyles juz tego kola ratunkowego (50/50)" << "\n";
-            }
-        }
-        else if((userAns) == 'f'){ // wprowadzenie phone a friend
-            if(lifelinesUsed[1]== false)
-            {
-                system("cls");
-                lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                {
-                    return 1;
-                }
-                else return 0;
-            }
-            else
-            {
-                cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
-            }
-        }
-        else if((userAns) == 'p'){ // wprowadzenie audience poll
-            if(lifelinesUsed[2]== false)
-            {
-                system("cls");
-                lifelinesUsed[2] = lifelineAskTheAudience();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                {
-                    return 1;
-                }
-                else return 0;
-            }
-            else
-            {
-                cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << "\n";
-            }
-        }
-        else
-        {
-            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
-                 << "Odpowiedz >> ";
-        }
-    }
-
-    cout << "Poprawna odpowiedz to ";
-
-    switch (getCorr())
-    {
-    case 1:
-        cout << getAns1();
-        break;
-    case 2:
-        cout << getAns2();
-        break;
-    case 3:
-        cout << getAns3();
-        break;
-    case 4:
-        cout << getAns4();
-        break;
-    }
-    cout << endl;
+    showAnswear();
 
     return result;
 }
