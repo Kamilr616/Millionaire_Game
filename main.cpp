@@ -32,7 +32,6 @@ int main()
 
         system("cls"); // cmd terminal clear
         game.show();
-
         
         if (((gameSet[game.getGameStage()].askQuestion()) == true) && game.getGameStage() <= 15)
         {
@@ -47,8 +46,6 @@ int main()
             system("cls");
             break;
         }
-
-
     }
     return 0;
 }

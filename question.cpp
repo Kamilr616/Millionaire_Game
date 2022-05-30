@@ -11,6 +11,40 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
+void question::lifeline5050(){
+    int ffCounter = 0;
+    int randQ[2];
+    while(ffCounter < 2){
+        randQ[ffCounter] = ((int)(rand() % 4 + 1));
+        if(ffCounter == 0){
+            if(randQ[ffCounter] != getCorr()){
+                ffCounter++;
+            }
+        }
+        else if(ffCounter == 1){
+            if(randQ[ffCounter] != getCorr() && randQ[ffCounter] != randQ[ffCounter-1]){
+                ffCounter++;
+            }
+        }
+    }
+
+    for(int i = 0; i<2; i++){
+        if(randQ[i] == 1){
+            answ1 = " ";
+        }
+        else if(randQ[i] == 2){
+            answ2 = " ";
+        }
+        else if(randQ[i] == 3){
+            answ3 = " ";
+        }
+        else if(randQ[i] == 4){
+            answ4 = " ";
+        }
+    }
+}
+
+
 bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     bool result;
@@ -26,18 +60,34 @@ bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeś
          << "D > " << getAns4() << endl
          << "Poprawna odpowiedz "<< getCorr() << endl
          << "Odpowiedz >> ";
-    cin >> userAns;
+       userAns = 'h';
 
-    if (((int)userAns - 64) == getCorr())
-    {
-        cout << "Dobrze!" << endl;
-        result = true;       
-    }
-
-    else
-    {
-        cout << "Zle!" << endl;
-        result = false;
+    while((userAns != 'A') || (userAns != 'B') || (userAns != 'C') || (userAns != 'D') || (userAns != '%')){
+        cin >> userAns;
+        if(userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D'){
+            if (((int)userAns - 64) == getCorr())
+            {
+                cout << "Dobrze!" << endl;
+                result = true;
+                break;       
+            }      
+            else
+            {
+                cout << "Zle!" << endl;
+                result = false;
+                break;
+            }
+        }
+        else if((userAns) == '%'){
+            lifeline5050();
+            if(askQuestion() == true){
+                return true;
+            }
+            else return false;
+        }
+        else {
+            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << "\n";
+        }
     }
 
     cout << "Poprawna odpowiedz to ";
