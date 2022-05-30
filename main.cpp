@@ -11,20 +11,25 @@ int main()
 {
 
     int i, option,Ans;
+    bool showAns;
+    
     bool lifelines[3] = {false, false, false}; // lifelines[0] - 50/50, [1] - telefon do przyjaciela, [2] - pytanie do publicznosci
+
     i = 0;
     option = 1;
-
+    showAns = true;
+    
     srand(time(0));
 
     question gameSet[15]; // zestaw pytan do calej gry
     Stage game; //  etap gry
 
-    while (option)
+    while (option != 0)
     {
         system("cls"); // cmd terminal clear
         cout << "Gra milionerzy " << endl
              << "1. Nowa gra" << endl
+             << "9. Ustawienia programu" << endl
              << "0. Zakoncz" << endl;
 
         cin >> option;
@@ -54,7 +59,7 @@ int main()
                     break;
                 }
 
-                Ans = (gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage(), game.getScore()));
+                Ans = (gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage(), game.getScore(), showAns));
 
                 if (Ans == 1)
                 {
@@ -78,13 +83,31 @@ int main()
                 }
             }
             break;
-        case 0:
-            option = 0;
-            break;
-        default:
-            break;
+        case 9:
+            while (option != 0)
+            {
+                system("cls");
+                cout << "   Ustawienia programu:" << endl;
+                cout << "1. Pokaz odpowiedzi  >> " << (showAns ? "Tak" : "Nie") << endl
+                     << "2.  >>  " << endl
+                     << "0. Cofnij" << endl
+                     << ">>    ";
+                cin >> option;
+                switch (option)
+                {
+                case 1:
+                    showAns = not showAns;
+                    break;
+                case 2:
+                    break;
+                case 0:
+                    break;
+                default:
+                    break;
+                }
+            }
+            option = -1;
         }
     }
-
     return 0;
 }

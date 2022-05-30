@@ -109,13 +109,14 @@ bool question::lifeline5050(){
 }
 
 
-int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
     int result;
     char userAns;
     
     result = 0;
     userAns = 'h';
+
     cout << "Aktualny etap > " << (stepCount+1) << endl
     << "Wynik > " << scoreCount  <<  " zL"<< endl;
     cout << "Dostepne kola ratunkowe:" << endl;
@@ -137,10 +138,13 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) 
          << "C > " << getAns3() << endl
          << "D > " << getAns4() << endl
          << endl
-         << "E > Poddaj sie" << endl;
+         << "E > Poddaj sie - Koniec gry" << endl
+         << "Odpowiedz >> " << endl;
+    if(showAns)
+    {
+    cout << "Poprawna odpowiedz "<< getCorr() << endl;
 
-    cout << "Poprawna odpowiedz "<< getCorr() << endl //do testów
-         << "Odpowiedz >> ";
+    }
 
     while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
     {
@@ -186,7 +190,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) 
             if(lifelinesUsed[0]== false){
                 system("cls");
                 lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
                     return 1;
                 }
                 else return 0;
@@ -199,7 +203,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) 
             if(lifelinesUsed[1]== false){
                 system("cls");
                 lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
                     return 1;
                 }
                 else return 0;
@@ -212,7 +216,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount) 
             if(lifelinesUsed[2]== false){
                 system("cls");
                 lifelinesUsed[2] = lifelineAskTheAudience();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
                     return 1;
                 }
                 else return 0;
