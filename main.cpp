@@ -1,6 +1,5 @@
 #include "global.hpp"
 #include "question.hpp"
-
 #include "stage.hpp"
 #include "question.cpp"
 #include "stage.cpp"
@@ -9,8 +8,7 @@ using namespace std;
 
 int main()
 {
-
-    int i, option,Ans;
+    int i, option, Ans;
     bool showAns;
     
     bool lifelines[3] = {false, false, false}; // lifelines[0] - 50/50, [1] - telefon do przyjaciela, [2] - pytanie do publicznosci

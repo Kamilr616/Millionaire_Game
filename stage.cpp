@@ -107,7 +107,6 @@ void Stage::up()
     }
 }
 
-
 int Stage::end()
 {
     int result = score;
@@ -131,7 +130,6 @@ int Stage::end()
 int Stage::giveup()
 {
     int result = score;
-    
     gameStage = 0;
     score = 0;
 

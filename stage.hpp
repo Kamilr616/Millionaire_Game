@@ -7,7 +7,6 @@ using namespace std;
 
 class Stage
 {
-
     private:
 
         int gameStage;
@@ -21,9 +20,7 @@ class Stage
         int getScore();
         void up();
         int end();
-        int giveup();
-        
+        int giveup();   
 };
-
 
 #endif // STAGE_HPP

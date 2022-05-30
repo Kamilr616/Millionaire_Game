@@ -1,6 +1,5 @@
 #include "question.hpp"
 
-
 question::question(string _text, string _answ1, string _answ2, string _answ3, string _answ4, int _correct)
 {
     text = _text;
@@ -25,9 +24,6 @@ bool question::lifelineAskTheAudience(){
     cout << "Odpowiedzi publicznosci to: " << "A: " << g1 << "% " << "B: " << g2 << "% " << "C: " << g3 << "% " << "D: " << g4 << "%" << "\n"; 
     return true;
 }
-
-
-
 
 bool question::lifelinePhoneAFriend(int stepCounter){
     int guess;
@@ -73,7 +69,6 @@ bool question::lifelinePhoneAFriend(int stepCounter){
     return true;
 }
 
-
 bool question::lifeline5050(){
     int ffCounter = 0;
     int randQ[2];
@@ -107,7 +102,6 @@ bool question::lifeline5050(){
     }
     return true;
 }
-
 
 int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
@@ -297,7 +291,7 @@ question question::questionFromLine(string qLine) // funkcja dzieli linijkę z p
     getline(temp, a3, ';');
     getline(temp, a4, ';');
     getline(temp, corr, '\n');
-   // stoi(corr)
+    
     question currQuestion(q1, a1, a2, a3, a4, stoi(corr));
 
     return currQuestion; //zwraca obiekt z gotowym pytaniem

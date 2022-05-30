@@ -34,5 +34,4 @@ class question
 
 };
 
-
 #endif // QUESTION_HPP
