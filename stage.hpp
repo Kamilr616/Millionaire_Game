@@ -13,7 +13,6 @@ class Stage
         int gameStage = 0;
         int score = 0;
 
-
     public:
 
         Stage() = default;
