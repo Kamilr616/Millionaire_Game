@@ -11,15 +11,54 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
-void question::askQuestion()
+bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
+    bool result;
+    char userAns;
+    
+    result = 0;
 
-        cout << "Pytanie > " << getText() << endl
-         << "Odpowiedzi: " << endl
-         << "A > " << getAns1() << endl
-         << "B > " << getAns2() << endl
-         << "C > " << getAns3() << endl
-         << "D > " << getAns4() << endl;
+    cout << "Pytanie > " << getText() << endl
+     << "Odpowiedzi: " << endl
+     << "A > " << getAns1() << endl
+     << "B > " << getAns2() << endl
+     << "C > " << getAns3() << endl
+     << "D > " << getAns4() << endl
+     << "Odpowiedz >> ";
+     cin >> userAns;
+
+    if (((int)userAns - 64) == getCorr())
+    {
+        cout << "Dobrze!" << endl;
+        result = true;       
+    }
+
+    else
+    {
+        cout << "Zle!" << endl;
+        result = false;
+    }
+
+    cout << "Poprawna odpowiedz to ";
+
+    switch (getCorr())
+    {
+    case 1:
+        cout << getAns1();
+        break;
+    case 2:
+        cout << getAns2();
+        break;
+    case 3:
+        cout << getAns3();
+        break;
+    case 4:
+        cout << getAns4();
+        break;
+    }
+    cout << endl;
+
+    return result;
 }
 
 

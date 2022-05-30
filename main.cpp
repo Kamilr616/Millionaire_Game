@@ -22,19 +22,28 @@ int main()
 
     Stage game;
 
+    for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
+    {
+        gameSet[i] = gameSet[i].getQuestions(i + 1);
+    }
+
     while(option > 0)
     {
 
-        for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
+        system("cls"); // cmd terminal clear
+        
+        if((gameSet[game.getGameStage()].askQuestion()) == true)
         {
-            gameSet[i] = gameSet[i].getQuestions(i+1);
+            //game. ++
+            cout << "Gratulacje!";
+            system("PAUSE");
+        }
+        else
+        {
+            cout << "0.Zakoncz" << endl;
+            cin >> option;
         }
 
-        system("cls"); // cmd terminal clear
-        gameSet[game.getGameStage()].askQuestion();
-
-        cout << "0.Zakoncz" << endl;
-        cin >> option;
     }
     return 0;
 }

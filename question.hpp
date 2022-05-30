@@ -24,7 +24,7 @@ class question
         string getAns3();
         string getAns4();
         int getCorr();
-        void askQuestion();
+        bool askQuestion();
 
         question questionFromLine(string qLine);
         question getQuestions(int stepCounter);
