@@ -22,15 +22,16 @@ void Stage::up()
     switch(gameStage)   //próg gwarantowany
     {
         case 5:
-            cout << "Próg gwarantowany 1000 zl" << endl;
+            cout << "Prog gwarantowany 1000 zl" << endl;
+            system("PAUSE");
             score = 1000;
             break;
         case 10:
-            cout << "Próg gwarantowany 32 000 zl" << endl;
+            cout << "Prog gwarantowany 32 000 zl" << endl;
+            system("PAUSE");
             score = 32000;
             break;
         case 16:
-            cout << "Glowna nagroda 1 mln zl!" << endl;
             score = 1000000;
             break;
         default:
@@ -46,10 +47,17 @@ void Stage::show()
 
 int Stage::end()
 {
+    int result = score;
 
-    gameStage = 0;
-
+    if(gameStage > 15)
+    {
+        cout << "Wyglales milion zlotych !!!" << endl;
+    }
     // tutaj trzeba zaimplementować przypadek zrezygnowania
+    
+    
+    gameStage = 0;
+    score = 0;
 
-    return score;
+    return result;
 }

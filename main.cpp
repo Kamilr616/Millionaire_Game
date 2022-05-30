@@ -27,13 +27,13 @@ int main()
         gameSet[i] = gameSet[i].getQuestions(i + 1);
     }
 
-    while(option > 0)
+    while(option)
     {
 
         system("cls"); // cmd terminal clear
         game.show();
 
-        if((gameSet[game.getGameStage()].askQuestion()) == true)
+        if (((gameSet[game.getGameStage()].askQuestion()) == true) && game.getGameStage() <= 15)
         {
             system("PAUSE");
             game.up();
@@ -42,15 +42,11 @@ int main()
         else
         {
             cout << "Twoj wynik > " << game.end() << endl;
-
-            cout << "0.Zakoncz" << endl;
-            cin >> option;
-        }
-        if(game.getGameStage()>15)
-        {
-            cout << "Wygrałeś milion!!!" << endl;
+            system("PAUSE");
+            system("cls");
             break;
         }
+
 
     }
     return 0;
