@@ -109,65 +109,84 @@ bool question::lifeline5050(){
 }
 
 
-bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+int question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
 {
-    bool result;
+    int result;
     char userAns;
     
     result = 0;
+    userAns = 'h';
 
-    cout << "Pytanie > " << getText() << endl
+    cout << "Dostepne kola ratunkowe:" << endl;
+    if (lifelinesUsed[0] == false)
+        cout << "-50/50 (wprowadz '%' na klawiaturze)" << endl;
+    if (lifelinesUsed[1] == false)
+        cout << "-Telefon do przyjaciela (wprowadz 'f' na klawiaturze)" << endl;
+    if (lifelinesUsed[2] == false)
+        cout << "-Pytanie do publicznosci (wprowadz 'p' na klawiaturze)" << endl;
+    if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
+        cout << "Brak" << endl;
+
+    cout << endl 
+         << "Pytanie > " << getText() << endl
          << "Odpowiedzi: " << endl
          << "A > " << getAns1() << endl
          << "B > " << getAns2() << endl
          << "C > " << getAns3() << endl
          << "D > " << getAns4() << endl
-         << "Dostepne kola ratunkowe:" << endl;
-        if(lifelinesUsed[0] == false) cout << "-50/50 (wprowadz '%' na klawiaturze)" << endl;
-        if(lifelinesUsed[1] == false) cout << "-Telefon do przyjaciela (wprowadz 'f' na klawiaturze)" << endl;
-        if(lifelinesUsed[2] == false) cout << "-Pytanie do publicznosci (wprowadz 'p' na klawiaturze)" << endl;
-        if(lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true) cout << "Brak" << endl;
-    cout << "Poprawna odpowiedz "<< getCorr() << endl
-         << "Odpowiedz >> ";
-       userAns = 'h';
+         << endl
+         << "E > Poddaj sie" << endl;
 
-    while((userAns != 'A') || (userAns != 'B') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p')){
+    cout << "Poprawna odpowiedz "<< getCorr() << endl //do testów
+         << "Odpowiedz >> ";
+
+    while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
+    {
         cin >> userAns;
-        if(userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D'){
+
+        if ((userAns == 'E') || (userAns == 'e'))
+        {
+            result = 2;
+            break;
+        }
+
+        if (userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D')
+        {
             if (((int)userAns - 64) == getCorr())
             {
                 cout << "Dobrze!" << endl;
-                result = true;
-                break;       
-            }      
+                result = 1;
+                break;
+            }
             else
-            {
+           {
                 cout << "Zle!" << endl;
-                result = false;
+                result = 0;
                 break;
             }
         }
+
         if(userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd'){
             if (((int)userAns - 96) == getCorr())
             {
                 cout << "Dobrze!" << endl;
-                result = true;
+                result = 1;
                 break;       
             }      
             else
             {
                 cout << "Zle!" << endl;
-                result = false;
+                result = 0;
                 break;
             }
         }
         else if((userAns) == '%'){ // wprowadzenie 50/50
             if(lifelinesUsed[0]== false){
                 lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed, stepCount) == true){
-                    return true;
+                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                    return 1;
                 }
-                else return false;
+                else return 0;
             }
             else{
                 cout << "Uzyles juz tego kola ratunkowego (50/50)" << "\n";
@@ -176,10 +195,10 @@ bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta py
         else if((userAns) == 'f'){ // wprowadzenie phone a friend
             if(lifelinesUsed[1]== false){
                 lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
-                if(askQuestion(lifelinesUsed, stepCount) == true){
-                    return true;
+                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                    return 1;
                 }
-                else return false;
+                else return 0;
             }
             else{
                 cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
@@ -188,10 +207,10 @@ bool question::askQuestion(bool lifelinesUsed[3], int stepCount) //Wyświelta py
         else if((userAns) == 'p'){ // wprowadzenie audience poll
             if(lifelinesUsed[2]== false){
                 lifelinesUsed[2] = lifelineAskTheAudience();
-                if(askQuestion(lifelinesUsed, stepCount) == true){
-                    return true;
+                if(askQuestion(lifelinesUsed, stepCount) == 1){
+                    return 1;
                 }
-                else return false;
+                else return 0;
             }
             else{
                 cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << "\n";
@@ -269,7 +288,7 @@ question question::questionFromLine(string qLine) // funkcja dzieli linijkę z p
     getline(temp, a4, ';');
     getline(temp, corr, '\n');
    // stoi(corr)
-    question currQuestion(q1, a1, a2, a3, a4, 1);
+    question currQuestion(q1, a1, a2, a3, a4, stoi(corr));
 
     return currQuestion; //zwraca obiekt z gotowym pytaniem
 }

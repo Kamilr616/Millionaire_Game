@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
 
-    int i, option;
+    int i, option,Ans;
     bool lifelines[3] = {false, false, false}; // lifelines[0] - 50/50, [1] - telefon do przyjaciela, [2] - pytanie do publicznosci
     i = 0;
     option = 1;
@@ -56,13 +56,22 @@ int main()
                 }
 
                 game.show();
+                Ans = (gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage()));
 
-                if (((gameSet[game.getGameStage()].askQuestion(lifelines, game.getGameStage())) == true))
+                if (Ans == 1)
                 {
                     system("PAUSE");
                     game.up();
                 }
-                else
+                else if(Ans == 2)
+                {
+                    cout << "Poddanie gry!" << endl
+                         << "Twoj wynik > " << game.giveup() << " zL" << endl; // potrzebna nowa metoda zamiast end
+                    system("PAUSE");
+                    break;
+                }
+                
+                else // np  Ans == 0
                 {
                     cout << "Koniec gry!" << endl
                          << "Twoj wynik > " << game.end() << " zL" << endl;
