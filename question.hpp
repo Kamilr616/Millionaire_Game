@@ -28,6 +28,7 @@ class question
 
         question questionFromLine(string qLine);
         question getQuestions(int stepCounter);
+        void lifeline5050();
 
 };
 

@@ -32,8 +32,9 @@ int main()
     {
 
         system("cls"); // cmd terminal clear
-
-        if(game.getGameStage() >= 15)
+        game.show();
+        
+        if (((gameSet[game.getGameStage()].askQuestion()) == true) && game.getGameStage() <= 15)
         {
             cout << "Jestes milionerem !!!" << endl
                  << "Koniec gry" << endl
@@ -41,21 +42,6 @@ int main()
             system("PAUSE");
             break;
         }
-
-        game.show();
-
-        if (((gameSet[game.getGameStage()].askQuestion()) == true))
-        {
-            system("PAUSE");
-            game.up();
-        }
-        else
-        {
-            cout << "Twoj wynik > " << game.end() << " zL" << endl;
-            system("PAUSE");
-            break;
-        }
-
     }
     return 0;
 }
