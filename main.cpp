@@ -42,7 +42,7 @@ int main()
 
         game.show();
 
-        if (((gameSet[game.getGameStage()].askQuestion(lifelines)) == true))
+        if (((gameSet[game.getGameStage()].askQuestion(lifelines,(game.getGameStage()))) == true))
         {
             system("PAUSE");
             game.up();
