@@ -10,7 +10,8 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
-bool question::lifelineAskTheAudience(){
+bool question::lifelineAskTheAudience()
+{
     int g1, g2, g3, g4;
     int total = 100;
     g1 = (int)(rand() % 50 + 50);
@@ -25,7 +26,8 @@ bool question::lifelineAskTheAudience(){
     return true;
 }
 
-bool question::lifelinePhoneAFriend(int stepCounter){
+bool question::lifelinePhoneAFriend(int stepCounter)
+{
     int guess;
     if(stepCounter < 5){
         cout << "Uwazam, ze prawidlowa odpowiedz to ";
@@ -45,7 +47,8 @@ bool question::lifelinePhoneAFriend(int stepCounter){
             break;
         }
     }
-    else{
+    else
+    {
         guess = (int)(rand() % 4 + 1);
         cout << "Nie mam pewnosci, ale mysle, ze prawidlowa odpowiedz to ";
         switch (guess)
@@ -65,45 +68,52 @@ bool question::lifelinePhoneAFriend(int stepCounter){
         }
     }
 
-
     return true;
 }
 
-bool question::lifeline5050(){
+bool question::lifeline5050()
+{
     int ffCounter = 0;
     int randQ[2];
     while(ffCounter < 2){
         randQ[ffCounter] = ((int)(rand() % 4 + 1));
         if(ffCounter == 0){
-            if(randQ[ffCounter] != getCorr()){
+            if(randQ[ffCounter] != getCorr())
+            {
                 ffCounter++;
             }
         }
         else if(ffCounter == 1){
-            if(randQ[ffCounter] != getCorr() && randQ[ffCounter] != randQ[ffCounter-1]){
+            if(randQ[ffCounter] != getCorr() && randQ[ffCounter] != randQ[ffCounter-1])
+            {
                 ffCounter++;
             }
         }
     }
 
-    for(int i = 0; i<2; i++){
-        if(randQ[i] == 1){
+    for(int i = 0; i<2; i++)
+    {
+        if(randQ[i] == 1)
+        {
             answ1 = " ";
         }
-        else if(randQ[i] == 2){
+        else if(randQ[i] == 2)
+        {
             answ2 = " ";
         }
-        else if(randQ[i] == 3){
+        else if(randQ[i] == 3)
+        {
             answ3 = " ";
         }
-        else if(randQ[i] == 4){
+        else if(randQ[i] == 4)
+        {
             answ4 = " ";
         }
     }
     return true;
 }
 
-int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jesy poprawna
+int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns) //Wyświelta pytanie i odpowiedzi, zwraca true jeśli odp jest poprawna
 {
     int result;
     char userAns;
@@ -123,8 +133,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
         cout << "Brak" << endl;
 
-    cout << endl
-         
+    cout << endl  
          << "Pytanie > " << getText() << endl
          << "Odpowiedzi: " << endl
          << "A > " << getAns1() << endl
@@ -137,7 +146,6 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     if(showAns)
     {
     cout << "Poprawna odpowiedz "<< getCorr() << endl;
-
     }
 
     while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
@@ -181,45 +189,55 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
             }
         }
         else if((userAns) == '%'){ // wprowadzenie 50/50
-            if(lifelinesUsed[0]== false){
+            if(lifelinesUsed[0]== false)
+            {
                 system("cls");
                 lifelinesUsed[0] = lifeline5050();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                {
                     return 1;
                 }
                 else return 0;
             }
-            else{
+            else
+            {
                 cout << "Uzyles juz tego kola ratunkowego (50/50)" << "\n";
             }
         }
         else if((userAns) == 'f'){ // wprowadzenie phone a friend
-            if(lifelinesUsed[1]== false){
+            if(lifelinesUsed[1]== false)
+            {
                 system("cls");
                 lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                {
                     return 1;
                 }
                 else return 0;
             }
-            else{
+            else
+            {
                 cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << "\n";
             }
         }
         else if((userAns) == 'p'){ // wprowadzenie audience poll
-            if(lifelinesUsed[2]== false){
+            if(lifelinesUsed[2]== false)
+            {
                 system("cls");
                 lifelinesUsed[2] = lifelineAskTheAudience();
-                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1){
+                if(askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
+                {
                     return 1;
                 }
                 else return 0;
             }
-            else{
+            else
+            {
                 cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << "\n";
             }
         }
-        else {
+        else
+        {
             cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
                  << "Odpowiedz >> ";
         }
@@ -301,49 +319,64 @@ question question::getQuestions(int stepCounter) // numer etapu jako argument
 { 
     ifstream questions;
 
-    if(stepCounter == 1){
+    if(stepCounter == 1)
+    {
         questions.open("questions/1.csv");
     }
-    else if(stepCounter == 2){
+    else if(stepCounter == 2)
+    {
         questions.open("questions/2.csv");
     }
-    else if(stepCounter == 3){
+    else if(stepCounter == 3)
+    {
         questions.open("questions/3.csv");
     }
-    else if(stepCounter == 4){
+    else if(stepCounter == 4)
+    {
         questions.open("questions/4.csv");
     }
-    else if(stepCounter == 5){
+    else if(stepCounter == 5)
+    {
         questions.open("questions/5.csv");
     }
-    else if(stepCounter == 6){
+    else if(stepCounter == 6)
+    {
         questions.open("questions/6.csv");
     }
-    else if(stepCounter == 7){
+    else if(stepCounter == 7)
+    {
         questions.open("questions/7.csv");
     }
-    else if(stepCounter == 8){
+    else if(stepCounter == 8)
+    {
         questions.open("questions/8.csv");
     }
-    else if(stepCounter == 9){
+    else if(stepCounter == 9)
+    {
         questions.open("questions/9.csv");
     }
-    else if(stepCounter == 10){
+    else if(stepCounter == 10)
+    {
         questions.open("questions/10.csv");
     }
-    else if(stepCounter == 11){
+    else if(stepCounter == 11)
+    {
         questions.open("questions/11.csv");
     }
-    else if(stepCounter == 12){
+    else if(stepCounter == 12)
+    {
         questions.open("questions/12.csv");
     }
-    else if(stepCounter == 13){
+    else if(stepCounter == 13)
+    {
         questions.open("questions/13.csv");
     }
-    else if(stepCounter == 14){
+    else if(stepCounter == 14)
+    {
         questions.open("questions/14.csv");
     }
-    else if(stepCounter == 15){
+    else if(stepCounter == 15)
+    {
         questions.open("questions/15.csv");
     }
     string stepQuestions[12]; //tablica trzyma każdą linijke z pliku z pytaniami, na logike rozmiar powinien byc 11 ale wtedy nie dziala xd
