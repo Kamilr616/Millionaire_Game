@@ -10,7 +10,7 @@ class Stage
 
     private:
 
-        int gameStage;
+        int gameStage = 0;
 
 
     public:
