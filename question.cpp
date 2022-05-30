@@ -106,7 +106,8 @@ question question::questionFromLine(string qLine) // funkcja dzieli linijkę z p
     getline(temp, a3, ';');
     getline(temp, a4, ';');
     getline(temp, corr, '\n');
-    question currQuestion(q1, a1, a2, a3, a4, stoi(corr));
+   // stoi(corr)
+    question currQuestion(q1, a1, a2, a3, a4, 1);
 
     return currQuestion; //zwraca obiekt z gotowym pytaniem
 }
