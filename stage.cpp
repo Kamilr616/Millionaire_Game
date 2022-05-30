@@ -127,3 +127,13 @@ int Stage::end()
 
     return result;
 }
+
+int Stage::giveup()
+{
+    int result = score;
+    
+    gameStage = 0;
+    score = 0;
+
+    return result;
+}

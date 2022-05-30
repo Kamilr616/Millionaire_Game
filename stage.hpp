@@ -21,6 +21,7 @@ class Stage
         void up();
         void show();
         int end();
+        int giveup();
         
 };
 
