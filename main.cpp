@@ -27,26 +27,34 @@ int main()
         gameSet[i] = gameSet[i].getQuestions(i + 1);
     }
 
+    
     while(option)
     {
 
         system("cls"); // cmd terminal clear
+
+        if(game.getGameStage() >= 15)
+        {
+            cout << "Wynik > " << game.end() << " zL" << endl;
+            cout << "Wyglales milion zlotych !!!" << endl;
+            system("PAUSE");
+            break;
+        }
+
         game.show();
 
-        if (((gameSet[game.getGameStage()].askQuestion()) == true) && game.getGameStage() <= 15)
+        if (((gameSet[game.getGameStage()].askQuestion()) == true))
         {
             system("PAUSE");
             game.up();
-
         }
         else
         {
-            cout << "Twoj wynik > " << game.end() << endl;
+            cout << "Twoj wynik > " << game.end() << " zL" << endl;
             system("PAUSE");
             system("cls");
             break;
         }
-
 
     }
     return 0;

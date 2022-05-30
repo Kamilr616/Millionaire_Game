@@ -22,7 +22,6 @@ class Stage
         void show();
         int end();
         
-        
 };
 
 
