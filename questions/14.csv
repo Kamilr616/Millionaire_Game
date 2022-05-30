@@ -1,2 +1,11 @@
-ID,QUESTION,ANSWER1,ANSWER2,ANSWER3,ANSWER4,CORRECT_ANSWER
-1,,,,,,
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;Z jakiego kraju pochodzi Justin Bieber?;USA;Kanada;Belgia;UK;2
+2;Jaki film  zawiera epizod autorstwa Donald Trump?;Sam w domu;Sam w domu 2: Zagubieni w Nowym Jorku;Richie Rich;Ma³e dranie;2
+3;Która postaæ z kreskówek mieszka w ananasie pod morzem?;Fl¹dra;Nemo;Rick i Morty;SpongeBob Kanciastoporty;4
+4; Jakie jest narodowe zwierzê Szkocji?;Koñ;Jednoro¿ec;Wilk;Krowa;2
+5;Który kraj produkuje najwiêcej kawy na œwiecie?;Kolumbia;Indonezja;Brazylia;Wietnam;3
+6;Jaki jest smak Cointreau?;Bazylia;Cytrynowy;Wanilia;Pomarañczowy;4
+7;Jak nazywa siê dzwon zegarowy w Pa³acu Westminsterskim w Londynie?;Big Ben;Pancernik;Tykwa;Mumia;1
+8;Jaki by³ pierwszy napój bezalkoholowy zabrany w kosmos?;Pepsi;Fanta;Coca cola;Sprite;3
+9;Ile wa¿y kostium Chewbacca?;Osiem funtów;Siedemnaœcie funtów;Szeœæ funtów;Piêtnaœcie funtów;1
+10;Kto napisa³ s³ynny pamiêtnik, ukrywaj¹c siê przed nazistami w Amsterdamie?;Anna Frank;Bridget Jones;Maria Curie;Helen Keller;1

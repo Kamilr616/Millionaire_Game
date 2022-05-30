@@ -1,2 +1,11 @@
-ID,QUESTION,ANSWER1,ANSWER2,ANSWER3,ANSWER4,CORRECT_ANSWER
-1,,,,,,
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;W którym roku zakoñczy³a siê pierwsza wojna œwiatowa? ;1918;1919;1920;1939;1
+2;Kto strzeli³ jedynego gola w wygranym 1:0 meczu Chelsea z Man City w finale Ligi Mistrzów 2021? ;Mason Mount ;N golo Kante ;Kai Havertz ;Timo Werner ;3
+3;Jaka jest najwiêksza firma technologiczna w Korei Po³udniowej wed³ug Fortune 500? ;Hyundai ;Samsung ;Huawei  ;Kia ;2
+4;Ile serc ma oœmiornica? ;1;2;4;3;4
+5;Ile metrów mierzy góruj¹ca nad Rio de Janeiro figura Chrystusa?;16;38;54;56;2
+6;Którym kraj jest najwiêkszym na œwiecie producentem diamentów?;Rosja;USA;Kenia ;RPA;1
+7;Jaki procent powierzchni Grenlandii pokrywa l¹dolód?;50 proc;30 proc;80 proc;90 proc;3
+8;Most Golden Gate w San Francisco zosta³ zbudowany nad:;Zatok¹ Kalifornijsk¹ ;cieœnin¹ Golden Gate ;rzek¹ Rio Grande ;Wis³¹;2
+9;Pojazd z literami TK na tablicy rejestracyjnej pochodzi z:;Tarnowa ;Kielc ;K³odzka ;Warszawy;2
+10;Tyrol to nazwa regionu le¿¹cego na terenie:;W³och i Austrii ;Niemiec  Austrii i Francji ;W³och i Szwajcarii ;Hiszpanii;1

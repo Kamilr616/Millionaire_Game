@@ -1,2 +1,11 @@
-ID,QUESTION,ANSWER1,ANSWER2,ANSWER3,ANSWER4,CORRECT_ANSWER
-1,,,,,,
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;Najd³u¿sz¹ rzek¹ w Polsce jest Wis³a. Ile kilometrów mierzy?;1134;986;1047;1260;3
+2;Jak nazywa³ siê brat Boles³awa Krzywoustego?;Mieszko ;Jaros³aw ;Zbigniew ;Adam;3
+3;Ilu s¹siadów Polski ma dostêp do morza?;dwóch ;trzech;czterech;jeden;3
+4; Anita W³odarczyk zdoby³a dwa z³ote medale olimpijskie w:;rzucie m³otem ;pchniêciu kul¹ ;skoku w dal ;biegu przez potki;1
+5;Temud¿yn to znany póŸniej:;Marco Polo ;Czyngis-chan ;Sulejman Wspania³y ;Bujantu-chan;2
+6;Janusz Sid³o by³ jednym z czo³owych œwiatowych:;dyskoboli ;oszczepników ;p³otkarzy ;sprinterów;2
+7;Kto zast¹pi³ na tronie W³adys³awa £okietka?;Kazimierz Wielki ;Ludwik Wêgierski ;Jadwiga ;Jan I Olbracht ;1
+8; Religi¹ dominuj¹c¹ w Japonii jest buddyzm oraz...;chrzeœcijañstwo ;szinto ;islam ;prawos³awie;2
+9;Jak nazywa³ siê najwiêkszy statek Krzysztofa Kolumba, na którym dotar³ do Ameryki?;Santa Maria;Pinta;Nina;Gloria;1
+10;Na tablicy Mendelejewa symbolem P oznaczony jest...;potas ;azot ;fosfor ;hel;3
