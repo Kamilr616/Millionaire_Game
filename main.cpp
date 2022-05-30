@@ -28,15 +28,16 @@ int main()
     }
 
     
-    while(option)
+    while(1)
     {
 
         system("cls"); // cmd terminal clear
 
         if(game.getGameStage() >= 15)
         {
-            cout << "Wynik > " << game.end() << " zL" << endl;
-            cout << "Wyglales milion zlotych !!!" << endl;
+            cout << "Jestes milionerem !!!" << endl
+                 << "Koniec gry" << endl
+                 << "Wynik > " << game.end() << " zL" << endl;
             system("PAUSE");
             break;
         }
@@ -52,7 +53,6 @@ int main()
         {
             cout << "Twoj wynik > " << game.end() << " zL" << endl;
             system("PAUSE");
-            system("cls");
             break;
         }
 
