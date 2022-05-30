@@ -105,7 +105,7 @@ void Stage::up()
 void Stage::show()
 {
     cout << "Aktualny etap > " << (gameStage+1) << endl
-         << "Wynik > " << score  <<  " zł"<< endl;
+         << "Wynik > " << score  <<  " zL"<< endl;
 }
 
 int Stage::end()

@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 int main()
 {
 
@@ -18,7 +17,7 @@ int main()
 
     srand(time(0));
 
-    question gameSet[15]; //zestaw pytan do calej gry
+    question gameSet[15]; // zestaw pytan do calej gry
 
     Stage game;
 
@@ -27,18 +26,30 @@ int main()
         gameSet[i] = gameSet[i].getQuestions(i + 1);
     }
 
-    
-    while(1)
+    while (1)
     {
 
         system("cls"); // cmd terminal clear
-        game.show();
-        
-        if (((gameSet[game.getGameStage()].askQuestion()) == true) && game.getGameStage() <= 15)
+
+        if (game.getGameStage() >= 15)
         {
             cout << "Jestes milionerem !!!" << endl
                  << "Koniec gry" << endl
                  << "Wynik > " << game.end() << " zL" << endl;
+            system("PAUSE");
+            break;
+        }
+
+        game.show();
+
+        if (((gameSet[game.getGameStage()].askQuestion()) == true))
+        {
+            system("PAUSE");
+            game.up();
+        }
+        else
+        {
+            cout << "Twoj wynik > " << game.end() << " zL" << endl;
             system("PAUSE");
             break;
         }
