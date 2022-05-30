@@ -49,7 +49,9 @@ int main()
         }
         else
         {
-            cout << "Twoj wynik > " << game.end() << " zL" << endl;
+            system("cls");
+            cout << "Koniec gry!" << endl
+                 << "Twoj wynik > " << game.end() << " zL" << endl;
             system("PAUSE");
             break;
         }
