@@ -19,13 +19,14 @@ bool question::askQuestion() //Wyświelta pytanie i odpowiedzi, zwraca true jeś
     result = 0;
 
     cout << "Pytanie > " << getText() << endl
-     << "Odpowiedzi: " << endl
-     << "A > " << getAns1() << endl
-     << "B > " << getAns2() << endl
-     << "C > " << getAns3() << endl
-     << "D > " << getAns4() << endl
-     << "Odpowiedz >> ";
-     cin >> userAns;
+         << "Odpowiedzi: " << endl
+         << "A > " << getAns1() << endl
+         << "B > " << getAns2() << endl
+         << "C > " << getAns3() << endl
+         << "D > " << getAns4() << endl
+         << "Poprawna odpowiedz "<< getCorr() << endl
+         << "Odpowiedz >> ";
+    cin >> userAns;
 
     if (((int)userAns - 64) == getCorr())
     {

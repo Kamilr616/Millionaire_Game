@@ -31,7 +31,8 @@ int main()
     {
 
         system("cls"); // cmd terminal clear
-        
+        game.show();
+
         if((gameSet[game.getGameStage()].askQuestion()) == true)
         {
             system("PAUSE");
@@ -44,6 +45,11 @@ int main()
 
             cout << "0.Zakoncz" << endl;
             cin >> option;
+        }
+        if(game.getGameStage()>15)
+        {
+            cout << "Wygrałeś milion!!!" << endl;
+            break;
         }
 
     }
