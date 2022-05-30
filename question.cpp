@@ -226,7 +226,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
             }
         }
         else {
-            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << "\n";
+            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
+                 << "Odpowiedz >> ";
         }
     }
 
