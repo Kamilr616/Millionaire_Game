@@ -23,12 +23,14 @@ class question
         string getAns2();
         string getAns3();
         string getAns4();
+
         int getCorr();
-        void showAnswear();
         int askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns);
+        void showAnswear();
 
         question questionFromLine(string qLine);
         question getQuestions(int stepCounter);
+
         bool lifeline5050();
         bool lifelinePhoneAFriend(int stepCounter);
         bool lifelineAskTheAudience();

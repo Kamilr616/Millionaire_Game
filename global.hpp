@@ -8,6 +8,8 @@
 #include <ctime>
 #include <cstdlib>
 
+
 using namespace std;
+
 
 #endif // GLOBAL_HPP

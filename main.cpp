@@ -28,7 +28,7 @@ int main()
         system("cls"); // cmd terminal clear
         cout << "Gra milionerzy " << endl
              << "1. Nowa gra" << endl
-             << "9. Ustawienia programu" << endl
+             << "2. Ustawienia programu" << endl
              << "0. Zakoncz" << endl;
 
         cin >> option;
@@ -67,12 +67,12 @@ int main()
                 else if(Ans == 2)
                 {
                     cout << "Poddanie gry!" << endl
-                         << "Twoj wynik > " << game.giveup() << " zL" << endl; // potrzebna nowa metoda zamiast end
+                         << "Twoj wynik > " << game.giveup() << " zL" << endl; 
                     system("PAUSE");
                     break;
                 }
                 
-                else // np  Ans == 0
+                else 
                 {
                     cout << "Koniec gry!" << endl
                          << "Twoj wynik > " << game.end() << " zL" << endl;
@@ -81,7 +81,7 @@ int main()
                 }
             }
             break;
-        case 9:
+        case 2:
             while (option != 0)
             {
                 system("cls");
@@ -96,8 +96,6 @@ int main()
                 {
                     case 1:
                         showAns = not showAns;
-                        break;
-                    case 2:
                         break;
                     case 0:
                         break;

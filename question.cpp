@@ -155,7 +155,6 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
         cout << "Brak" << endl;
 
-
         if(showAns)
             showAnswear();
 
