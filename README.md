@@ -79,7 +79,9 @@
 >  **Atlassian Bitbucket** (Git)
 
 >  **Microsoft Office Excel** (pliki `.csv`)
-  
+
+>  **Microsoft Visual Code** (kod)
+
 ## Proces debugowania 
 
 ```bash
