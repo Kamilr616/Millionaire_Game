@@ -28,7 +28,7 @@ int main()
         system("cls"); // cmd terminal clear
         cout << "Gra milionerzy " << endl
              << "1. Nowa gra" << endl
-             << "2. Ustawienia programu" << endl
+             << "9. Ustawienia programu" << endl
              << "0. Zakoncz" << endl;
 
         cin >> option;
@@ -81,7 +81,7 @@ int main()
                 }
             }
             break;
-        case 2:
+        case 9:
             while (option != 0)
             {
                 system("cls");
