@@ -78,12 +78,10 @@
 
 >  **Atlassian Bitbucket** (Git)
 
+>  **Discord** (komunikacja głosowa)
+
+>  **Facebook Messenger** (komunikacja tekstowa)
+
 >  **Microsoft Office Excel** (pliki `.csv`)
 
->  **Microsoft Visual Code** (kod)
-
-## Proces debugowania 
-
-```bash
-	debug
-```
+>  **Microsoft Visual Studio Code** (edycja kodu)
