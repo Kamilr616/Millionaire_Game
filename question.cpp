@@ -144,8 +144,8 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     userAns = 'h';
 
     cout << "Aktualny etap > " << (stepCount+1) << endl
-    << "Wynik > " << scoreCount  <<  " zL"<< endl;
-    cout << "Dostepne kola ratunkowe:" << endl;
+         << "Wynik > " << scoreCount  << " zL" << endl
+         << "Dostepne kola ratunkowe:" << endl;
     if (lifelinesUsed[0] == false)
         cout << "-50/50 (wprowadz '%' na klawiaturze)" << endl;
     if (lifelinesUsed[1] == false)
@@ -214,7 +214,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
             { // wprowadzenie 50/50
                 if (lifelinesUsed[0] == false)
                 {
-                    system("cls");
+                    clear_screen();
                     lifelinesUsed[0] = lifeline5050();
                     if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
                     {
@@ -233,7 +233,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
             { // wprowadzenie phone a friend
                 if (lifelinesUsed[1] == false)
                 {
-                    system("cls");
+                    clear_screen();
                     lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
                     if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
                     {
@@ -252,7 +252,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
             { // wprowadzenie audience poll
                 if (lifelinesUsed[2] == false)
                 {
-                    system("cls");
+                    clear_screen();
                     lifelinesUsed[2] = lifelineAskTheAudience();
                     if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
                     {

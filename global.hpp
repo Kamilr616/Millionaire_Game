@@ -11,5 +11,15 @@
 
 using namespace std;
 
+#define WINDOWS  //proszę zakomentwoać w przypadku kompilacji na linux
+
+void clear_screen()
+{
+#ifdef WINDOWS
+    std::system("cls");
+#else
+    std::system("clear");
+#endif
+}
 
 #endif // GLOBAL_HPP

@@ -7,6 +7,8 @@
 
 using namespace std;
 
+
+
 int main()
 {
     int i, option, Ans;
@@ -25,10 +27,10 @@ int main()
 
     while (option != 0)
     {
-        system("cls"); // cmd terminal clear
+        clear_screen();
         cout << "Gra milionerzy " << endl
              << "1. Nowa gra" << endl
-             << "9. Ustawienia programu" << endl
+             << "2. Ustawienia programu" << endl
              << "0. Zakoncz" << endl;
 
         cin >> option;
@@ -46,14 +48,17 @@ int main()
         case 1:
             while (true)
             {
-                system("cls"); // cmd terminal clear
+                clear_screen();
 
                 if (game.getGameStage() >= 15)
                 {
                     cout << "Jestes milionerem !!!" << endl
                          << "Koniec gry" << endl
                          << "Wynik > " << game.end() << " zL" << endl;
-                    system("PAUSE");
+
+                    cin.ignore(1024, '\n');
+                    cout << "Nacisnij enter aby kontynuowac...";
+                    cin.get();
                     break;
                 }
 
@@ -61,14 +66,18 @@ int main()
 
                 if (Ans == 1)
                 {
-                    system("PAUSE");
                     game.up();
+                    cin.ignore(1024, '\n');
+                    cout << "Nacisnij enter aby kontynuowac...";
+                    cin.get();
                 }
                 else if(Ans == 2)
                 {
                     cout << "Poddanie gry!" << endl
-                         << "Twoj wynik > " << game.giveup() << " zL" << endl; 
-                    system("PAUSE");
+                         << "Twoj wynik > " << game.giveup() << " zL" << endl;
+                    cin.ignore(1024, '\n');
+                    cout << "Nacisnij enter aby kontynuowac...";
+                    cin.get();
                     break;
                 }
                 
@@ -76,15 +85,17 @@ int main()
                 {
                     cout << "Koniec gry!" << endl
                          << "Twoj wynik > " << game.end() << " zL" << endl;
-                    system("PAUSE");
+                    cin.ignore(1024, '\n');
+                    cout << "Nacisnij enter aby kontynuowac...";
+                    cin.get();
                     break;
                 }
             }
             break;
-        case 9:
+        case 2:
             while (option != 0)
             {
-                system("cls");
+                clear_screen();
                 cout << "   Ustawienia programu:" << endl;
                 cout << "1. Pokaz odpowiedzi  >> " << (showAns ? "Tak" : "Nie") << endl
                      << endl
