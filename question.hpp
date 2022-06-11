@@ -32,8 +32,8 @@ class question
         question getQuestions(int stepCounter);
 
         bool lifeline5050();
-        bool lifelinePhoneAFriend(int stepCounter);
-        bool lifelineAskTheAudience();
+        bool lifelinePhoneAFriend(int stepCounter, bool check5050);
+        bool lifelineAskTheAudience(bool check5050);
 
 };
 

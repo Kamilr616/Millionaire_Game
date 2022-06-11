@@ -10,24 +10,84 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
     correct = _correct;
 }
 
-bool question::lifelineAskTheAudience()
+bool question::lifelineAskTheAudience(bool check5050)
 {
-    int g1, g2, g3, g4;
+    int g1 = 0, g2 = 0, g3 = 0, g4 = 0;
     int total = 100;
-
-    g1 = (int)(rand() % 50 + 50);
-    int remainder = total - g1;
-    total = remainder;
-    g2 = (int)(rand() % remainder + 1);
-    remainder = total - g2;
-    total = remainder;
-    g3 = (int)(rand() % remainder + 1);
-    g4 = total - g3;
+    if(check5050 == false){
+        if(getCorr() == 1){
+            g1 = (int)(rand() % 50 + 50);
+            int remainder = total - g1;
+            total = remainder;
+            g2 = (int)(rand() % remainder + 1);
+            remainder = total - g2;
+            total = remainder;
+            g3 = (int)(rand() % remainder + 1);
+            g4 = total - g3;
+        }
+        if(getCorr() == 2){
+            g2 = (int)(rand() % 50 + 50);
+            int remainder = total - g2;
+            total = remainder;
+            g1 = (int)(rand() % remainder + 1);
+            remainder = total - g1;
+            total = remainder;
+            g3 = (int)(rand() % remainder + 1);
+            g4 = total - g3;
+        }
+        if(getCorr() == 3){
+            g3 = (int)(rand() % 50 + 50);
+            int remainder = total - g3;
+            total = remainder;
+            g2 = (int)(rand() % remainder + 1);
+            remainder = total - g2;
+            total = remainder;
+            g1 = (int)(rand() % remainder + 1);
+            g4 = total - g1;
+        }
+        if(getCorr() == 4){
+            g4 = (int)(rand() % 50 + 50);
+            int remainder = total - g4;
+            total = remainder;
+            g2 = (int)(rand() % remainder + 1);
+            remainder = total - g2;
+            total = remainder;
+            g3 = (int)(rand() % remainder + 1);
+            g1 = total - g3;
+        }
+    }
+    else{
+            if(getCorr() == 1){
+            g1 = (int)(rand() % 50 + 50);
+            if(getAns2() != " ") g2 = 100 - g1;
+            if(getAns3() != " ") g3 = 100 - g1;
+            if(getAns4() != " ") g4 = 100 - g1;
+            
+        }
+        if(getCorr() == 2){
+            g2 = (int)(rand() % 50 + 50);
+            if(getAns1() != " ") g1 = 100 - g2;
+            if(getAns3() != " ") g3 = 100 - g2;
+            if(getAns4() != " ") g4 = 100 - g2;
+        }
+        if(getCorr() == 3){
+            g3 = (int)(rand() % 50 + 50);
+            if(getAns2() != " ") g2 = 100 - g3;
+            if(getAns1() != " ") g1 = 100 - g3;
+            if(getAns4() != " ") g4 = 100 - g3;
+        }
+        if(getCorr() == 4){
+            g4 = (int)(rand() % 50 + 50);
+            if(getAns2() != " ") g2 = 100 - g4;
+            if(getAns3() != " ") g3 = 100 - g4;
+            if(getAns1() != " ") g1 = 100 - g4;
+        }
+    }
     cout << "Odpowiedzi publicznosci to: " << "A: " << g1 << "% " << "B: " << g2 << "% " << "C: " << g3 << "% " << "D: " << g4 << "%" << "\n"; 
     return true;
 }
 
-bool question::lifelinePhoneAFriend(int stepCounter)
+bool question::lifelinePhoneAFriend(int stepCounter, bool check5050)
 {
     int guess;
     if(stepCounter < 5){
@@ -49,26 +109,40 @@ bool question::lifelinePhoneAFriend(int stepCounter)
         }
     }
     else
-    {
-        guess = (int)(rand() % 4 + 1);
+    {   
+        int guessed = 0;
         cout << "Nie mam pewnosci, ale mysle, ze prawidlowa odpowiedz to ";
+        while (guessed < 1){
+        guess = (int)(rand() % 4 + 1);
         switch (guess)
-        {
-        case 1:
-            cout << "A" << endl;
-            break;
-        case 2:
-            cout << "B" << endl;
-            break;
-        case 3:
-            cout << "C" << endl;
-            break;
-        case 4:
-            cout << "D" << endl;
-            break;
+            {
+            case 1:
+                if(getAns1() != " "){
+                    cout << "A" << endl;
+                    guessed = 1;
+                    break;
+                }
+            case 2:
+                if(getAns2() != " "){
+                    cout << "B" << endl;
+                    guessed = 1;
+                    break;
+                }
+            case 3:
+                if(getAns3() != " "){
+                    cout << "C" << endl;
+                    guessed = 1;
+                    break;
+                }
+            case 4:
+                if(getAns4() != " "){
+                    cout << "D" << endl;
+                    guessed = 1;
+                    break;
+                }
+            }
         }
     }
-
     return true;
 }
 
@@ -234,7 +308,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
                 if (lifelinesUsed[1] == false)
                 {
                     clear_screen();
-                    lifelinesUsed[1] = lifelinePhoneAFriend(stepCount);
+                    lifelinesUsed[1] = lifelinePhoneAFriend(stepCount, lifelinesUsed[0]);
                     if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
                     {
                         return 1;
@@ -253,7 +327,7 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
                 if (lifelinesUsed[2] == false)
                 {
                     clear_screen();
-                    lifelinesUsed[2] = lifelineAskTheAudience();
+                    lifelinesUsed[2] = lifelineAskTheAudience(lifelinesUsed[0]);
                     if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
                     {
                         return 1;
