@@ -16,9 +16,9 @@ using namespace std;
 void clear_screen()
 {
 #ifdef WINDOWS
-    std::system("cls");
+    system("cls");
 #else
-    std::system("clear");
+    system("clear");
 #endif
 }
 
