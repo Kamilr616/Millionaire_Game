@@ -11,7 +11,9 @@
 
 using namespace std;
 
-#define WINDOWS  //proszę zakomentwoać w przypadku kompilacji na linux
+
+//  V   zakomentwoac w przypadku kompilacji na linux
+//#define WINDOWS  
 
 void clear_screen()
 {
