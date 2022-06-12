@@ -30,21 +30,21 @@ int main()
         cout << "Gra milionerzy " << endl
              << "1. Nowa gra" << endl
              << "2. Ustawienia programu" << endl
+             << endl
              << "0. Zakoncz" << endl;
 
         cin >> option;
 
-        for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
-            gameSet[i] = gameSet[i].getQuestions(i + 1);
-        
-
-        lifelines[0] = false;
-        lifelines[1] = false;
-        lifelines[2] = false;
-
         switch (option)
         {
         case 1:
+            for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
+            gameSet[i] = gameSet[i].getQuestions(i + 1);
+
+            lifelines[0] = false;
+            lifelines[1] = false;
+            lifelines[2] = false;
+
             while (true)
             {
                 clear_screen();
