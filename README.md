@@ -1,87 +1,96 @@
-# README #
+# 💰 Millionaire Game
 
-# Gra Milionerzy - Projekt 7
+[![C++](https://img.shields.io/badge/C++-console%20game-00599C?logo=cplusplus&logoColor=white)](https://isocpp.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+> 🇵🇱 [Wersja polska](README.pl.md)
 
-## Podział prac 
+> 🗓️ **Project period:** 2022
 
-### zadania
+A console implementation of the classic **"Who Wants to Be a Millionaire?"** quiz game, written in C++. Answer 12 increasingly difficult questions, use your lifelines wisely, and win the (virtual) million!
 
-### Kamil Rataj                        
-##### Stworzenie repozytorium               
-##### Pisanie kodu                                              
- 
-### Kacper Krzyżkowski  
-###### Pisanie kodu 
-                                                               
-### Tomasz Porwisz   
-###### Utorzenie pytań
-###### Poprawa pytań
-###### Dokumentacja
+## ✨ Features
 
+- ❓ **12 difficulty levels** — question pools loaded from CSV files (`questions/1.csv` … `15.csv`), easy to extend with your own questions
+- 🛟 **Three lifelines** — *50:50* (removes two wrong answers), *phone a friend*, and *ask the audience*
+- 📊 **Score tracking** — correct-answer counter and give-up option (walk away with your winnings)
+- ⚙️ **Settings menu** — e.g. toggle revealing the correct answer
+- 🖥️ Lightweight, dependency-free console UI
 
-## Instrukcja obsługi dla użytkownika
+## 🎮 How to play
 
-###### Po uruchomienu aplikacju ukazją nam się trzy opcje do wyboru
+After launching the game you'll see the main menu:
 
-[ Zdjęcie ](https://files.fm/f/fr3b8v2bj)
+| Key | Action |
+|-----|--------|
+| `1` | New game |
+| `9` | Settings |
+| `0` | Exit |
 
-###### Aby wybrać nową grę klikamy 1 
-###### Aby wybrać ustwienia programu klikamy 9
-###### Aby Zakończyć klikamy 0
+During the game the available lifelines are shown at the top, followed by the question and four answers. Pick the right answer to advance; a wrong answer (or giving up) ends the game. Answer all questions to win the million!
 
-###### W ustawieniach możęmy wybrać opcje pokazywania dobrych odpowiedzi.
+```text
+Gra milionerzy
+1. Nowa gra
+9. Ustawienia
+0. Wyjscie
+> 1
 
-[ Zdjęcie ](https://files.fm/f/hjkb4ygar)
+Kola ratunkowe:  [50:50]  [Telefon]  [Publicznosc]
+Pytanie 1  (500 zl)
+Kandydat na wysokie stanowisko czesto nie musi miec kwalifikacji, o ile ma mocne:
+  1. lydki      2. kolana
+  3. plecy      4. rece
+Twoja odpowiedz: 3
+Poprawna odpowiedz! Grasz dalej...
+```
 
-###### Po wybraniu nowa gra ukazuje nam się ekran gry
+## 📋 Question format
 
-[ Zdjęcie ](https://files.fm/f/qabmvd8bc)
+Questions live in `questions/<level>.csv` — one file per difficulty level — as semicolon-separated rows:
 
-###### U góry pokazują się nam dostępne koła ratunkowe.
-###### Pod kołami ratunkowymi mamy pytanie i odpowiedzi do niego.
-###### Mamy też licznik odpowiedzi poprawynych i możliwość poddania się.
+```csv
+ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER
+1;Which muscle should a candidate have strong?;calves;knees;back;arms;3
+```
 
-###### Poniżej prezentacja wybrania poprawnej odpowiedzi
+`CORRECT_ANSWER` is the index (1–4) of the correct answer. Add your own questions by appending rows.
 
+## 📂 Repository structure
 
-[ Zdjęcie ](https://files.fm/f/mtcrag8be)
+| Path | Description |
+|------|-------------|
+| `main.cpp` | Entry point and game loop |
+| `stage.{hpp,cpp}` | Game stage logic (menu, rounds, lifelines) |
+| `question.{hpp,cpp}` | Question model and CSV loading |
+| `global.hpp` | Shared definitions |
+| `questions/*.csv` | Question banks per difficulty level |
 
-###### i złej
+## 🚀 Building
 
-[ Zdjęcie ](https://files.fm/f/pw7htv4du)
+```bash
+git clone https://github.com/Kamilr616/Millionaire_Game.git
+cd Millionaire_Game
+g++ -std=c++17 main.cpp stage.cpp question.cpp -o millionaire
+./millionaire
+```
 
+> The `questions/` directory must be next to the executable at runtime.
 
-###### Po kiknieciu koła ratunkowego 50 na 50 usówają nam się dwie błędne odpowiedzi
+A prebuilt Windows executable can also be published under the repository's **Releases**.
 
-[ Zdjęcie ](https://files.fm/f/89wgw58rw)
+## 👥 Team
 
-###### Poniżej pokazuję urzycie pozostałych dwóch kół ratunkowych
+| Member | Contribution |
+|--------|--------------|
+| **Kamil Rataj** | Repository setup, programming |
+| **Kacper Krzyżkowski** | Programming |
+| **Tomasz Porwisz** | Question authoring & proofreading, documentation |
 
-[ Zdjęcie ](https://files.fm/f/4t87vzup4)
+## 📄 License
 
-[ Zdjęcie ](https://files.fm/f/3e5uedwsp)
+This project is licensed under the [MIT License](LICENSE).
 
-###### Możemy też przegrać przez złą odpowiedź lub poddnanie
- 
-[ Zdjęcie ](https://files.fm/f/pw7htv4du)
+## 👤 Author
 
-
-###### W przypadku wygranej program informuje nas o wyganiu miliona i zakończeniu gry
-
-
-[ Zdjęcie ](https://files.fm/f/pztfk4tkb)
-
-
-
-## Wykorzystane narzędzia 
-
->  **Atlassian Bitbucket** (Git)
-
->  **Discord** (komunikacja głosowa)
-
->  **Facebook Messenger** (komunikacja tekstowa)
-
->  **Microsoft Office Excel** (pliki `.csv`)
-
->  **Microsoft Visual Studio Code** (edycja kodu)
+**Kamil Rataj** — [GitHub](https://github.com/Kamilr616) · [LinkedIn](https://www.linkedin.com/in/kamil-r-153ab7121/)
