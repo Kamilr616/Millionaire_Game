@@ -7,17 +7,18 @@
 #include <sstream>
 #include <ctime>
 #include <cstdlib>
+#include <filesystem>
+#include <limits>
+#include <stdexcept>
+#include <vector>
 
 
 using namespace std;
 
 
-//  V   zakomentwoac w przypadku kompilacji na linux
-//#define WINDOWS  
-
-void clear_screen()
+inline void clear_screen()
 {
-#ifdef WINDOWS
+#ifdef _WIN32
     system("cls");
 #else
     system("clear");

@@ -2,13 +2,10 @@
 #include "question.hpp"
 #include "stage.hpp"
 
-#include "question.cpp"
-#include "stage.cpp"
-
 using namespace std;
 
 
-int main()
+int main(int argc, char *argv[])
 {
     int i, option, Ans;
     bool showAns;
@@ -19,7 +16,14 @@ int main()
     option = 1;
     showAns = false;
     
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    if (argc > 0) {
+        const filesystem::path executableDirectory = filesystem::absolute(argv[0]).parent_path();
+        if (!executableDirectory.empty()) {
+            filesystem::current_path(executableDirectory);
+        }
+    }
 
     question gameSet[15]; // zestaw pytan do calej gry
     Stage game; //  etap gry
@@ -33,13 +37,31 @@ int main()
              << endl
              << "0. Zakoncz" << endl;
 
-        cin >> option;
+        if (!(cin >> option))
+        {
+            if (cin.eof())
+                return 0;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            option = -1;
+            continue;
+        }
 
         switch (option)
         {
         case 1:
-            for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
-            gameSet[i] = gameSet[i].getQuestions(i + 1);
+            try {
+                for (i = 0; i < 15; i++) // losowanie zestawu 15 pytan
+                    gameSet[i] = gameSet[i].getQuestions(i + 1);
+            }
+            catch (const exception &error)
+            {
+                cerr << "Nie mozna wczytac pytan: " << error.what() << endl;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Nacisnij enter aby kontynuowac...";
+                cin.get();
+                break;
+            }
 
             lifelines[0] = false;
             lifelines[1] = false;
@@ -55,7 +77,7 @@ int main()
                          << "Koniec gry" << endl
                          << "Wynik > " << game.end() << " zL" << endl;
 
-                    cin.ignore(1024, '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Nacisnij enter aby kontynuowac...";
                     cin.get();
                     break;
@@ -66,7 +88,7 @@ int main()
                 if (Ans == 1)
                 {
                     game.up();
-                    cin.ignore(1024, '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Nacisnij enter aby kontynuowac...";
                     cin.get();
                 }
@@ -74,7 +96,7 @@ int main()
                 {
                     cout << "Poddanie gry!" << endl
                          << "Twoj wynik > " << game.giveup() << " zL" << endl;
-                    cin.ignore(1024, '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Nacisnij enter aby kontynuowac...";
                     cin.get();
                     break;
@@ -84,7 +106,7 @@ int main()
                 {
                     cout << "Koniec gry!" << endl
                          << "Twoj wynik > " << game.end() << " zL" << endl;
-                    cin.ignore(1024, '\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     cout << "Nacisnij enter aby kontynuowac...";
                     cin.get();
                     break;
@@ -100,12 +122,20 @@ int main()
                      << endl
                      << "0. Cofnij" << endl
                      << "Opcja >> ";
-                cin >> option;
+                if (!(cin >> option))
+                {
+                    if (cin.eof())
+                        return 0;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    option = -1;
+                    continue;
+                }
 
                 switch (option)
                 {
                     case 1:
-                        showAns = not showAns;
+                        showAns = !showAns;
                         break;
                     case 0:
                         break;

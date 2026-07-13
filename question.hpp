@@ -11,20 +11,20 @@ class question
     private:
 
         string text,answ1,answ2,answ3,answ4;
-        int correct;
+        int correct = 0;
 
     public:
 
         question() = default;
         question(string _text, string _answ1, string _answ2, string _answ3, string _answ4, int _correct);
 
-        string getText();
-        string getAns1();
-        string getAns2();
-        string getAns3();
-        string getAns4();
+        string getText() const;
+        string getAns1() const;
+        string getAns2() const;
+        string getAns3() const;
+        string getAns4() const;
 
-        int getCorr();
+        int getCorr() const;
         int askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, bool showAns);
         void showAnswear();
 

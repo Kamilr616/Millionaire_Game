@@ -1,7 +1,49 @@
 #include "question.hpp"
 
+namespace
+{
+string trimField(const string &value)
+{
+    const size_t first = value.find_first_not_of(" \t\r\n");
+    if (first == string::npos)
+        return "";
+
+    const size_t last = value.find_last_not_of(" \t\r\n");
+    return value.substr(first, last - first + 1);
+}
+
+int parseInteger(const string &value, const string &fieldName)
+{
+    size_t parsedCharacters = 0;
+    int result;
+
+    try
+    {
+        result = stoi(value, &parsedCharacters);
+    }
+    catch (const invalid_argument &)
+    {
+        throw runtime_error("Pole " + fieldName + " musi byc liczba calkowita.");
+    }
+    catch (const out_of_range &)
+    {
+        throw runtime_error("Pole " + fieldName + " jest poza zakresem typu int.");
+    }
+
+    if (parsedCharacters != value.size())
+        throw runtime_error("Pole " + fieldName + " zawiera dodatkowe znaki.");
+
+    return result;
+}
+}
+
 question::question(string _text, string _answ1, string _answ2, string _answ3, string _answ4, int _correct)
 {
+    if (_text.empty() || _answ1.empty() || _answ2.empty() || _answ3.empty() || _answ4.empty())
+        throw invalid_argument("Pytanie i wszystkie odpowiedzi musza byc niepuste.");
+    if (_correct < 1 || _correct > 4)
+        throw invalid_argument("Numer poprawnej odpowiedzi musi byc w zakresie 1-4.");
+
     text = _text;
     answ1 = _answ1;
     answ2 = _answ2;
@@ -12,178 +54,74 @@ question::question(string _text, string _answ1, string _answ2, string _answ3, st
 
 bool question::lifelineAskTheAudience(bool check5050)
 {
-    int g1 = 0, g2 = 0, g3 = 0, g4 = 0;
-    int total = 100;
-    if(check5050 == false){
-        if(getCorr() == 1){
-            g1 = (int)(rand() % 50 + 50);
-            int remainder = total - g1;
-            total = remainder;
-            g2 = (int)(rand() % remainder + 1);
-            remainder = total - g2;
-            total = remainder;
-            g3 = (int)(rand() % remainder + 1);
-            g4 = total - g3;
-        }
-        if(getCorr() == 2){
-            g2 = (int)(rand() % 50 + 50);
-            int remainder = total - g2;
-            total = remainder;
-            g1 = (int)(rand() % remainder + 1);
-            remainder = total - g1;
-            total = remainder;
-            g3 = (int)(rand() % remainder + 1);
-            g4 = total - g3;
-        }
-        if(getCorr() == 3){
-            g3 = (int)(rand() % 50 + 50);
-            int remainder = total - g3;
-            total = remainder;
-            g2 = (int)(rand() % remainder + 1);
-            remainder = total - g2;
-            total = remainder;
-            g1 = (int)(rand() % remainder + 1);
-            g4 = total - g1;
-        }
-        if(getCorr() == 4){
-            g4 = (int)(rand() % 50 + 50);
-            int remainder = total - g4;
-            total = remainder;
-            g2 = (int)(rand() % remainder + 1);
-            remainder = total - g2;
-            total = remainder;
-            g3 = (int)(rand() % remainder + 1);
-            g1 = total - g3;
+    int votes[4] = {0, 0, 0, 0};
+    const int correctIndex = getCorr() - 1;
+    votes[correctIndex] = rand() % 31 + 50;
+
+    const string answers[4] = {getAns1(), getAns2(), getAns3(), getAns4()};
+    vector<int> visibleWrongAnswers;
+    for (int index = 0; index < 4; ++index) {
+        if (index != correctIndex && (!check5050 || answers[index] != " ")) {
+            visibleWrongAnswers.push_back(index);
         }
     }
-    else{
-            if(getCorr() == 1){
-            g1 = (int)(rand() % 50 + 50);
-            if(getAns2() != " ") g2 = 100 - g1;
-            if(getAns3() != " ") g3 = 100 - g1;
-            if(getAns4() != " ") g4 = 100 - g1;
-            
-        }
-        if(getCorr() == 2){
-            g2 = (int)(rand() % 50 + 50);
-            if(getAns1() != " ") g1 = 100 - g2;
-            if(getAns3() != " ") g3 = 100 - g2;
-            if(getAns4() != " ") g4 = 100 - g2;
-        }
-        if(getCorr() == 3){
-            g3 = (int)(rand() % 50 + 50);
-            if(getAns2() != " ") g2 = 100 - g3;
-            if(getAns1() != " ") g1 = 100 - g3;
-            if(getAns4() != " ") g4 = 100 - g3;
-        }
-        if(getCorr() == 4){
-            g4 = (int)(rand() % 50 + 50);
-            if(getAns2() != " ") g2 = 100 - g4;
-            if(getAns3() != " ") g3 = 100 - g4;
-            if(getAns1() != " ") g1 = 100 - g4;
-        }
+
+    int remainder = 100 - votes[correctIndex];
+    for (size_t index = 0; index < visibleWrongAnswers.size(); ++index) {
+        const bool isLast = index + 1 == visibleWrongAnswers.size();
+        const int assigned = isLast ? remainder : rand() % (remainder + 1);
+        votes[visibleWrongAnswers[index]] = assigned;
+        remainder -= assigned;
     }
-    cout << "Odpowiedzi publicznosci to: " << "A: " << g1 << "% " << "B: " << g2 << "% " << "C: " << g3 << "% " << "D: " << g4 << "%" << "\n"; 
+    votes[correctIndex] += remainder;
+
+    cout << "Odpowiedzi publicznosci to: " << "A: " << votes[0] << "% " << "B: " << votes[1]
+         << "% " << "C: " << votes[2] << "% " << "D: " << votes[3] << "%" << "\n";
     return true;
 }
 
-bool question::lifelinePhoneAFriend(int stepCounter, bool check5050)
+bool question::lifelinePhoneAFriend(int stepCounter, bool /*check5050*/)
 {
-    int guess;
-    if(stepCounter < 5){
-        cout << "Uwazam, ze prawidlowa odpowiedz to ";
-        switch (getCorr())
-        {
-        case 1:
-            cout << "A" << endl;
-            break;
-        case 2:
-            cout << "B" << endl;
-            break;
-        case 3:
-            cout << "C" << endl;
-            break;
-        case 4:
-            cout << "D" << endl;
-            break;
-        }
+    if (stepCounter < 5)
+    {
+        cout << "Uwazam, ze prawidlowa odpowiedz to "
+             << static_cast<char>('A' + getCorr() - 1) << endl;
     }
     else
-    {   
-        int guessed = 0;
-        cout << "Nie mam pewnosci, ale mysle, ze prawidlowa odpowiedz to ";
-        while (guessed < 1){
-        guess = (int)(rand() % 4 + 1);
-        switch (guess)
-            {
-            case 1:
-                if(getAns1() != " "){
-                    cout << "A" << endl;
-                    guessed = 1;
-                    break;
-                }
-            case 2:
-                if(getAns2() != " "){
-                    cout << "B" << endl;
-                    guessed = 1;
-                    break;
-                }
-            case 3:
-                if(getAns3() != " "){
-                    cout << "C" << endl;
-                    guessed = 1;
-                    break;
-                }
-            case 4:
-                if(getAns4() != " "){
-                    cout << "D" << endl;
-                    guessed = 1;
-                    break;
-                }
-            }
+    {
+        const string answers[4] = {getAns1(), getAns2(), getAns3(), getAns4()};
+        vector<int> visibleAnswers;
+        for (int index = 0; index < 4; ++index)
+        {
+            if (answers[index] != " ")
+                visibleAnswers.push_back(index);
         }
+
+        if (visibleAnswers.empty())
+            throw logic_error("Brak widocznych odpowiedzi dla kola ratunkowego.");
+
+        const size_t selected = static_cast<size_t>(rand()) % visibleAnswers.size();
+        cout << "Nie mam pewnosci, ale mysle, ze prawidlowa odpowiedz to "
+             << static_cast<char>('A' + visibleAnswers[selected]) << endl;
     }
     return true;
 }
 
 bool question::lifeline5050()
 {
-    int ffCounter = 0;
-    int randQ[2];
-    while(ffCounter < 2){
-        randQ[ffCounter] = ((int)(rand() % 4 + 1));
-        if(ffCounter == 0){
-            if(randQ[ffCounter] != getCorr())
-            {
-                ffCounter++;
-            }
-        }
-        else if(ffCounter == 1){
-            if(randQ[ffCounter] != getCorr() && randQ[ffCounter] != randQ[ffCounter-1])
-            {
-                ffCounter++;
-            }
-        }
+    string *answers[4] = {&answ1, &answ2, &answ3, &answ4};
+    vector<int> wrongAnswers;
+    for (int index = 0; index < 4; ++index)
+    {
+        if (index != getCorr() - 1)
+            wrongAnswers.push_back(index);
     }
 
-    for(int i = 0; i<2; i++)
+    for (int removed = 0; removed < 2; ++removed)
     {
-        if(randQ[i] == 1)
-        {
-            answ1 = " ";
-        }
-        else if(randQ[i] == 2)
-        {
-            answ2 = " ";
-        }
-        else if(randQ[i] == 3)
-        {
-            answ3 = " ";
-        }
-        else if(randQ[i] == 4)
-        {
-            answ4 = " ";
-        }
+        const size_t selected = static_cast<size_t>(rand()) % wrongAnswers.size();
+        *answers[wrongAnswers[selected]] = " ";
+        wrongAnswers.erase(wrongAnswers.begin() + static_cast<vector<int>::difference_type>(selected));
     }
     return true;
 }
@@ -227,126 +165,125 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
     if (lifelinesUsed[2] == false)
         cout << "-Pytanie do publicznosci (wprowadz 'p' na klawiaturze)" << endl;
     if (lifelinesUsed[0] == true && lifelinesUsed[1] == true && lifelinesUsed[2] == true)
+    {
         cout << "Brak" << endl;
+    }
 
-        if(showAns)
-            showAnswear();
+    if (showAns)
+        showAnswear();
 
-        cout << endl
-             << "Pytanie > " << getText() << endl
-             << "Odpowiedzi: " << endl
-             << "A > " << getAns1() << endl
-             << "B > " << getAns2() << endl
-             << "C > " << getAns3() << endl
-             << "D > " << getAns4() << endl
-             << endl
-             << "E > Poddaj sie - Koniec gry" << endl
-             << "Odpowiedz >> ";
+    cout << endl
+         << "Pytanie > " << getText() << endl
+         << "Odpowiedzi: " << endl
+         << "A > " << getAns1() << endl
+         << "B > " << getAns2() << endl
+         << "C > " << getAns3() << endl
+         << "D > " << getAns4() << endl
+         << endl
+         << "E > Poddaj sie - Koniec gry" << endl
+         << "Odpowiedz >> ";
 
-        while ((userAns != 'A') || (userAns != 'B') || (userAns != 'E') || (userAns != 'e') || (userAns != 'C') || (userAns != 'D') || (userAns != 'a') || (userAns != 'b') || (userAns != 'c') || (userAns != 'd') || (userAns != '%') || (userAns != 'f') || (userAns != 'p'))
+    while (true)
+    {
+        if (!(cin >> userAns))
         {
-            cin >> userAns;
-
-            if ((userAns == 'E') || (userAns == 'e'))
+            if (cin.eof())
             {
                 result = 2;
                 break;
             }
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
+                 << "Odpowiedz >> ";
+            continue;
+        }
 
-            if (userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D')
-            {
-                if (((int)userAns - 64) == getCorr())
-                {
-                    cout << "Dobrze!" << endl;
-                    result = 1;
-                    break;
-                }
-                else
-                {
-                    cout << "Zle!" << endl;
-                    result = 0;
-                    break;
-                }
-            }
+        if ((userAns == 'E') || (userAns == 'e'))
+        {
+            result = 2;
+            break;
+        }
 
-            if (userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd')
+        if (userAns == 'A' || userAns == 'B' || userAns == 'C' || userAns == 'D')
+        {
+            if (((int)userAns - 64) == getCorr())
             {
-                if (((int)userAns - 96) == getCorr())
-                {
-                    cout << "Dobrze!" << endl;
-                    result = 1;
-                    break;
-                }
-                else
-                {
-                    cout << "Zle!" << endl;
-                    result = 0;
-                    break;
-                }
-            }
-            else if ((userAns) == '%')
-            { // wprowadzenie 50/50
-                if (lifelinesUsed[0] == false)
-                {
-                    clear_screen();
-                    lifelinesUsed[0] = lifeline5050();
-                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                        return 0;
-                }
-                else
-                {
-                    cout << "Uzyles juz tego kola ratunkowego (50/50)" << endl
-                         << "Odpowiedz >> ";
-                }
-            }
-            else if ((userAns) == 'f')
-            { // wprowadzenie phone a friend
-                if (lifelinesUsed[1] == false)
-                {
-                    clear_screen();
-                    lifelinesUsed[1] = lifelinePhoneAFriend(stepCount, lifelinesUsed[0]);
-                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                        return 0;
-                }
-                else
-                {
-                    cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << endl
-                         << "Odpowiedz >> ";
-                }
-            }
-            else if ((userAns) == 'p')
-            { // wprowadzenie audience poll
-                if (lifelinesUsed[2] == false)
-                {
-                    clear_screen();
-                    lifelinesUsed[2] = lifelineAskTheAudience(lifelinesUsed[0]);
-                    if (askQuestion(lifelinesUsed, stepCount, scoreCount, showAns) == 1)
-                    {
-                        return 1;
-                    }
-                    else
-                        return 0;
-                }
-                else
-                {
-                    cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << endl
-                         << "Odpowiedz >> ";
-                }
+                cout << "Dobrze!" << endl;
+                result = 1;
+                break;
             }
             else
             {
-                cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
+                cout << "Zle!" << endl;
+                result = 0;
+                break;
+            }
+        }
+
+        if (userAns == 'a' || userAns == 'b' || userAns == 'c' || userAns == 'd')
+        {
+            if (((int)userAns - 96) == getCorr())
+            {
+                cout << "Dobrze!" << endl;
+                result = 1;
+                break;
+            }
+            else
+            {
+                cout << "Zle!" << endl;
+                result = 0;
+                break;
+            }
+        }
+        else if ((userAns) == '%')
+        { // wprowadzenie 50/50
+            if (lifelinesUsed[0] == false)
+            {
+                clear_screen();
+                lifelinesUsed[0] = lifeline5050();
+                return askQuestion(lifelinesUsed, stepCount, scoreCount, showAns);
+            }
+            else
+            {
+                cout << "Uzyles juz tego kola ratunkowego (50/50)" << endl
                      << "Odpowiedz >> ";
             }
         }
+        else if ((userAns) == 'f')
+        { // wprowadzenie phone a friend
+            if (lifelinesUsed[1] == false)
+            {
+                clear_screen();
+                lifelinesUsed[1] = lifelinePhoneAFriend(stepCount, lifelinesUsed[0]);
+                return askQuestion(lifelinesUsed, stepCount, scoreCount, showAns);
+            }
+            else
+            {
+                cout << "Uzyles juz tego kola ratunkowego (Telefon do przyjaciela)" << endl
+                     << "Odpowiedz >> ";
+            }
+        }
+        else if ((userAns) == 'p')
+        { // wprowadzenie audience poll
+            if (lifelinesUsed[2] == false)
+            {
+                clear_screen();
+                lifelinesUsed[2] = lifelineAskTheAudience(lifelinesUsed[0]);
+                return askQuestion(lifelinesUsed, stepCount, scoreCount, showAns);
+            }
+            else
+            {
+                cout << "Uzyles juz tego kola ratunkowego (Pytanie do publicznosci)" << endl
+                     << "Odpowiedz >> ";
+            }
+        }
+        else
+        {
+            cout << "Format odpowiedzi jest niepoprawny. Sprobuj jeszcze raz." << endl
+                 << "Odpowiedz >> ";
+        }
+    }
 
     showAnswear();
 
@@ -354,132 +291,102 @@ int question::askQuestion(bool lifelinesUsed[3], int stepCount, int scoreCount, 
 }
 
 
-string question::getText()
+string question::getText() const
 {
     return text;
 }
 
-string question::getAns1()
+string question::getAns1() const
 {
     return answ1;
 }
 
-string question::getAns2()
+string question::getAns2() const
 {
     return answ2;
 }
 
-string question::getAns3()
+string question::getAns3() const
 {
     return answ3;
 }
 
-string question::getAns4()
+string question::getAns4() const
 {
     return answ4;
 }
 
-int question::getCorr()
+int question::getCorr() const
 {
     return correct;
 }
 
-question question::questionFromLine(string qLine) // funkcja dzieli linijkę z pytaniem i wrzuca w obiekt pytania
+question question::questionFromLine(string qLine)
 {
-    string q1, a1, a2, a3, a4, corr, id;
-    istringstream temp;
+    vector<string> fields;
+    istringstream input(qLine);
+    string field;
+    while (getline(input, field, ';'))
+        fields.push_back(trimField(field));
 
-    temp.str(qLine);
-    getline(temp, id, ';');
-    getline(temp, q1, ';');
-    getline(temp, a1, ';');
-    getline(temp, a2, ';');
-    getline(temp, a3, ';');
-    getline(temp, a4, ';');
-    getline(temp, corr, '\n');
-    
-    question currQuestion(q1, a1, a2, a3, a4, stoi(corr));
+    if (fields.size() != 7)
+        throw runtime_error("Niepoprawny format wiersza pytania.");
 
-    return currQuestion; //zwraca obiekt z gotowym pytaniem
+    const int questionId = parseInteger(fields[0], "ID");
+    if (questionId < 1)
+        throw runtime_error("ID pytania musi byc dodatnie.");
+
+    for (size_t index = 1; index <= 5; ++index)
+    {
+        if (fields[index].empty())
+            throw runtime_error("Pytanie i wszystkie odpowiedzi musza byc niepuste.");
+    }
+
+    const int correctAnswer = parseInteger(fields[6], "CORRECT_ANSWER");
+    if (correctAnswer < 1 || correctAnswer > 4)
+        throw runtime_error("Numer poprawnej odpowiedzi musi byc w zakresie 1-4.");
+
+    return question(fields[1], fields[2], fields[3], fields[4], fields[5], correctAnswer);
 }
 
-question question::getQuestions(int stepCounter) // numer etapu jako argument
-{ 
-    ifstream questions;
+question question::getQuestions(int stepCounter)
+{
+    if (stepCounter < 1 || stepCounter > 15)
+        throw invalid_argument("Etap gry musi byc w zakresie 1-15.");
 
-    if(stepCounter == 1)
-    {
-        questions.open("questions/1.csv");
-    }
-    else if(stepCounter == 2)
-    {
-        questions.open("questions/2.csv");
-    }
-    else if(stepCounter == 3)
-    {
-        questions.open("questions/3.csv");
-    }
-    else if(stepCounter == 4)
-    {
-        questions.open("questions/4.csv");
-    }
-    else if(stepCounter == 5)
-    {
-        questions.open("questions/5.csv");
-    }
-    else if(stepCounter == 6)
-    {
-        questions.open("questions/6.csv");
-    }
-    else if(stepCounter == 7)
-    {
-        questions.open("questions/7.csv");
-    }
-    else if(stepCounter == 8)
-    {
-        questions.open("questions/8.csv");
-    }
-    else if(stepCounter == 9)
-    {
-        questions.open("questions/9.csv");
-    }
-    else if(stepCounter == 10)
-    {
-        questions.open("questions/10.csv");
-    }
-    else if(stepCounter == 11)
-    {
-        questions.open("questions/11.csv");
-    }
-    else if(stepCounter == 12)
-    {
-        questions.open("questions/12.csv");
-    }
-    else if(stepCounter == 13)
-    {
-        questions.open("questions/13.csv");
-    }
-    else if(stepCounter == 14)
-    {
-        questions.open("questions/14.csv");
-    }
-    else if(stepCounter == 15)
-    {
-        questions.open("questions/15.csv");
-    }
-    string stepQuestions[12]; //tablica trzyma każdą linijke z pliku z pytaniami, na logike rozmiar powinien byc 11 ale wtedy nie dziala xd
-    int qCounter = 0;
+    const filesystem::path path = filesystem::path("questions") / (to_string(stepCounter) + ".csv");
+    ifstream questions(path);
+    if (!questions)
+        throw runtime_error("Nie mozna otworzyc pliku " + path.string());
 
-    while(questions.good())
+    const string expectedHeader = "ID;QUESTIONS;ANSWER1;ANSWER2;ANSWER3;ANSWER4;CORRECT_ANSWER";
+    string line;
+    if (!getline(questions, line))
+        throw runtime_error("Plik " + path.string() + " jest pusty.");
+    if (trimField(line) != expectedHeader)
+        throw runtime_error("Plik " + path.string() + " ma niepoprawny naglowek.");
+
+    vector<question> rows;
+    int lineNumber = 1;
+    while (getline(questions, line))
     {
-        string line;
-        getline(questions, line, '\n');
-        stepQuestions[qCounter] = line;        
-        qCounter++;   
+        ++lineNumber;
+        if (trimField(line).empty())
+            continue;
+
+        try
+        {
+            rows.push_back(questionFromLine(line));
+        }
+        catch (const exception &error)
+        {
+            throw runtime_error(path.string() + ":" + to_string(lineNumber) + ": " + error.what());
+        }
     }
-    questions.close();
-    question theQuestion;
-    theQuestion = questionFromLine(stepQuestions[rand() % 10 + 1]); //losowanie pytania ktore znajdzie sie w zestawie 15 pytan
-   
-    return theQuestion;
+
+    if (rows.empty())
+        throw runtime_error("Plik " + path.string() + " nie zawiera pytan.");
+
+    const size_t selected = static_cast<size_t>(rand()) % rows.size();
+    return rows[selected];
 }

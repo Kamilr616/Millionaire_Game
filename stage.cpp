@@ -60,8 +60,8 @@ void Stage::up()
         score = 8000;
         break;
     case 9:
-        cout << "Wygrana 9000 zl" << endl;
-        score = 9000;
+        cout << "Wygrana 16 000 zl" << endl;
+        score = 16000;
         break;
     case 10:
         cout << "Prog gwarantowany 32 000 zl" << endl;
@@ -94,16 +94,14 @@ void Stage::up()
 
 int Stage::end()
 {
-    int result = score;
+    int result = 0;
 
-    if(gameStage <= 5)
-        result = 0;
-    if ((gameStage <= 10) && (gameStage >= 6))
-        result = 1000;
-    if(gameStage >= 11)
-        result = 32000;
-    if(gameStage >= 15)
+    if (gameStage >= 15)
         result = 1000000;
+    else if (gameStage >= 10)
+        result = 32000;
+    else if (gameStage >= 5)
+        result = 1000;
 
     gameStage = 0;
     score = 0;
