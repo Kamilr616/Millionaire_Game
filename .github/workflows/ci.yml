@@ -1,0 +1,20 @@
+name: C++ CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build game
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp stage.cpp question.cpp -o millionaire
+      - name: Build tests
+        run: g++ -std=c++17 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -I. tests/game_tests.cpp stage.cpp question.cpp -o millionaire-tests
+      - name: Run tests
+        run: ./millionaire-tests
